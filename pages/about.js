@@ -1,6 +1,7 @@
 import react from 'react';
 import Meta from '../components/Meta'
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const About = (props) => {
   return (
@@ -10,6 +11,7 @@ const About = (props) => {
       <div>
         About Me:
       </div>
+      <Footer/>
     </div>
   );
 }

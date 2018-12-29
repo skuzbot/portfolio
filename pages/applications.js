@@ -1,6 +1,7 @@
 import react from 'react';
 import Meta from '../components/Meta'
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Applications = (props) => {
   return (
@@ -10,6 +11,7 @@ const Applications = (props) => {
       <div>
         Applications here:
       </div>
+      <Footer/>
     </div>
   );
 }

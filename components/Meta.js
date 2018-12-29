@@ -13,9 +13,9 @@ const Meta = () => {
         body {
           margin: 0;
           padding: 0;
-        }
-        div {
+          background-color: #cfcfcf;
           font-family: 'Fira Mono', monospace;
+          height: 100%;
         }
       `}</style>
     </div>

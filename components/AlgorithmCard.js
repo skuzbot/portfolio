@@ -5,11 +5,13 @@ const AlgorithCard = (props) => {
         One Algorithm Here
       </div>
       <style jsx>{`
+        
+
         .card {
           border: 1px solid black;
-          width: ;
-          height 15%;
+          height: 300px;
           padding: 10px 40px;
+          margin: 20px 40px;
         }
       `}</style>
     </div>
