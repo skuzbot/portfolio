@@ -1,0 +1,32 @@
+{
+  "name": "steven-duncan-portfolio",
+  "version": "1.0.0",
+  "description": "Steven Duncan Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skuzbot/portfolio.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Steven Duncan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skuzbot/portfolio/issues"
+  },
+  "homepage": "https://github.com/skuzbot/portfolio#readme",
+  "dependencies": {
+    "@material-ui/core": "^3.7.1",
+    "@material-ui/icons": "^3.0.1",
+    "next": "^7.0.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
