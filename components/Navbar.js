@@ -13,42 +13,41 @@ export default class Navbar extends Component {
     return (
       <div>
         <div className='navbar-container'>
-          <div
-            className='logo'>
-            <Link href='/'>
+          <Link href='/'>
+            <div className='logo'>
               <a className='link'>
                 Steven Duncan's Portfolio
               </a>
-            </Link>
-          </div>
-          <div className='about navbar-item'>
-            <Link href='/about'>
+            </div>
+          </Link>
+          <Link href='/about'>
+            <div className='about navbar-item'>
               <a className='link'>
                 About
               </a>
-            </Link>
-          </div>
-          <div className='applications navbar-item'>
-            <Link href='/applications'>
+            </div>
+          </Link>
+          <Link href='/applications'>
+            <div className='applications navbar-item'>
               <a className='link'>
                 Applications
               </a>
-            </Link>
-          </div>
-          <div className='algorithms navbar-item'>
-            <Link href='/algorithms'>
+            </div>
+          </Link>
+          <Link href='/algorithms'>
+            <div className='algorithms navbar-item'>
               <a className='link'>
                 Algorithms
               </a>
-            </Link>
-          </div>
-          <div className='resume navbar-item'>
-            <Link href='/resume'>
+            </div>
+          </Link>
+          <Link href='/resume'>
+            <div className='resume navbar-item'>
               <a className='link'>
                 Resume
               </a>
-            </Link>
-          </div>
+            </div>
+          </Link>
           <style jsx>{`
             .navbar-container {
               width: auto;
@@ -57,7 +56,8 @@ export default class Navbar extends Component {
               padding: 10px;
               align-items: center;
               background-color: #9e9e9e;
-              border-top: 20px #b1bfca solid;
+              border-top: 20px #bbb5c3 solid;
+              border-bottom: 15px #bbb5c3 solid;
               justify-content: space-between;
             }
 
