@@ -10,13 +10,13 @@ export default class Algorithms extends Component {
     this.state = {
       algorithms: [
         'Rotate Matrix',
-        'Roman Numberal to Number',
+        'Roman to Number',
         'All Anagrams',
         'Sudoku Validator',
         'Parentheses Validator',
         'Water Blocks',
         'Shuffle Deck',
-        '8',
+        'Nth Fibonacci Number',
       ],
     }
   }
@@ -26,7 +26,6 @@ export default class Algorithms extends Component {
       <div className='container'>
         <Meta/>
         <Navbar/>
-        Algorithms here:
         <div className='algorithms-container'>
           {this.state.algorithms.map(algorithm => {
             return (

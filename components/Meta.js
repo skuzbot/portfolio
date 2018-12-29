@@ -16,6 +16,7 @@ const Meta = () => {
           background-color: #cfcfcf;
           font-family: 'Fira Mono', monospace;
           height: 100%;
+          cursor: default;
         }
       `}</style>
     </div>

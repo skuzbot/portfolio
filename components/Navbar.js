@@ -56,7 +56,7 @@ export default class Navbar extends Component {
               padding: 10px;
               align-items: center;
               background-color: #9e9e9e;
-              border-top: 20px #bbb5c3 solid;
+              border-top: 20px #373737 solid;
               border-bottom: 15px #bbb5c3 solid;
               justify-content: space-between;
             }
@@ -74,7 +74,7 @@ export default class Navbar extends Component {
             }
 
             .link {
-              color: #000000;
+              color: #000;
               text-decoration: none;
             }
           `}</style>
