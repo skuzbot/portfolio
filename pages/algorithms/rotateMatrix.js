@@ -1,14 +1,34 @@
 import { Component } from 'react';
-import Meta from '../components/Meta'
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Meta from '../../components/Meta'
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 
 export default class RotateMatrix extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      n: 3,
+    }
+  }
 
+  componentDidMount() {
+    this.generateMatrix();
+  }
+
+  generateMatrix() {
+    let n = this.state.n;
+    let el = document.getElementById('matrix');
+    for (let i = 0; i < n; i++) {
+      let row = document.createElement('div');
+      row.className = 'matrix-row';
+      for (let j = 0; j < n; j++) {
+        let cell = document.createElement('div');
+        cell.className = 'matrix-cell'
+        cell.innerText = (i * n) + j;
+        row.appendChild(cell);
+      }
+      el.appendChild(row);
     }
   }
 
@@ -18,7 +38,22 @@ export default class RotateMatrix extends Component {
         <Meta/>
         <Navbar/>
           Rotate Matrix
+
+          <div className='rotate'>
+            <div id='matrix'>
+              matrix
+            </div>
+
+          </div>
         <Footer/>
+        <style jsx>{`
+          .matrix {
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            Justify-content: space-between;
+          }
+        `}</style>
       </div>
     )
   }

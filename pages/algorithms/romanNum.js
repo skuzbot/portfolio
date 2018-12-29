@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import Meta from '../components/Meta'
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Meta from '../../components/Meta'
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 
 export default class RomanNum extends Component {
