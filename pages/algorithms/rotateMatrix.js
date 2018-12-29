@@ -9,10 +9,15 @@ export default class RotateMatrix extends Component {
     super(props)
     this.state = {
       n: 3,
+      inputMatrix: [],
     }
   }
 
   componentDidMount() {
+    this.generateMatrix();
+  }
+
+  componentDidUpdate() {
     this.generateMatrix();
   }
 
@@ -23,14 +28,47 @@ export default class RotateMatrix extends Component {
       let row = document.createElement('div');
       row.className = 'matrix-row';
       for (let j = 0; j < n; j++) {
-        let cell = document.createElement('div');
-        cell.className = 'matrix-cell'
-        cell.innerText = (i * n) + j;
+        let cell = document.createElement('input');
+        cell.className = 'matrix-cell';
+        cell.type = 'text';
+        cell.pattern = /[0-9]/;
+        cell.maxLength = '3';
+        cell.value = (i * n) + j;
+        cell.style.width = '80px';
+        cell.style.height = '40px';
+        cell.style['text-align'] = 'center';
+        cell.style.border = '1px solid black';
+        cell.style['font-family'] = 'Fira Mono, monospace';
+        cell.style['font-size'] = '1.4em';
         row.appendChild(cell);
       }
       el.appendChild(row);
     }
   }
+
+  handleNChange(e) {
+    e.preventDefault();
+    let n = this.state.n;
+    let el = document.getElementById('matrix');
+    if (n >= 0) {
+      while (el.lastChild) {
+        el.removeChild(el.lastChild);
+      }
+      if (e.target.name === 'increase') {
+        n += 1;
+        this.setState({
+          n: n,
+        })
+      } else if (n >= 1) {
+        n -= 1;
+        this.setState({
+          n: n,
+        })
+      }
+    }
+  }
+
+  
 
   render() {
     return(
@@ -38,20 +76,40 @@ export default class RotateMatrix extends Component {
         <Meta/>
         <Navbar/>
           Rotate Matrix
-
           <div className='rotate'>
+            Matrix
+            <button name='increase' onClick={e => this.handleNChange(e)}>
+              ▲
+            </button>
+            <button name='decrease' onClick={e => this.handleNChange(e)}>
+              ▼
+            </button>
             <div id='matrix'>
-              matrix
             </div>
 
           </div>
         <Footer/>
         <style jsx>{`
-          .matrix {
+          .rotate {
             width: 100vw;
             display: flex;
             align-items: center;
-            Justify-content: space-between;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          input[type='number']::-webkit-inner-spin-button,
+          input[type='number']::-webkit-outer-spin-button {
+            margin: 0;
+            -webkit-appearance: none;
+          }
+
+          button {
+            height: 50%;
+            border: none;
+            display: block;
+            border: 1px solid black;
+            margin: 8px;
           }
         `}</style>
       </div>
