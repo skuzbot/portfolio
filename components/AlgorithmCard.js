@@ -5,7 +5,7 @@ const AlgorithCard = ({ algorithm }) => {
     'Rotate Matrix': {
       fileName: 'rotateMatrix',
       graphic: '[[⟳]]',
-      fontSize: '3em',
+      fontSize: '3.5em',
     },
     'Roman to Number': {
       fileName: 'romanNum',
@@ -25,12 +25,12 @@ const AlgorithCard = ({ algorithm }) => {
     'Parentheses Validator': {
       fileName: 'validParan',
       graphic: '((()))',
-      fontSize: '3em',
+      fontSize: '3.5em',
     },
     'Water Blocks': {
       fileName: 'waterBlock',
       graphic: '      #\n# - - #\n# # - #\n# # # #',
-      fontSize: '1.8em',
+      fontSize: '2em',
     },
     'Shuffle Deck': {
       fileName: 'shuffleDeck',
@@ -64,7 +64,7 @@ const AlgorithCard = ({ algorithm }) => {
         .card-container {
           width: auto;
           height: 300px;
-          margin: 20px 30px;
+          margin: 30px 30px;
         }
 
         .link {
