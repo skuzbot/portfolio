@@ -43,8 +43,9 @@ export default class RotateMatrix extends Component {
         cell.style['text-align'] = 'center';
         cell.style.border = '1px solid black';
         cell.style['font-family'] = 'Fira Mono, monospace';
-        cell.style['font-size'] = '1.4em';
+        cell.style['font-size'] = '.8em';
         cell.oninput = (e) => this.handleCellValueChange(e);
+        cell.onclick = (e) => this.handleCellClick(e);
         row.appendChild(cell);
       }
       el.appendChild(row);
@@ -97,6 +98,10 @@ export default class RotateMatrix extends Component {
     this.displayInputMatrix();
   }
 
+  handleCellClick(e) {
+    e.target.value = '';
+  }
+
   rotateMatrix() {
     let matrix;
     if (this.state.outputMatrix.length === 0) {
@@ -126,9 +131,8 @@ export default class RotateMatrix extends Component {
       <div className='container'>
         <Meta/>
         <Navbar/>
-          Rotate Matrix
           <div className='rotate'>
-            Matrix
+            Rotate Matrix <span className='note'>(Feel free to change cell values)</span>
             <button name='increase' onClick={e => this.handleNChange(e)}>
               ▲
             </button>
@@ -165,6 +169,7 @@ export default class RotateMatrix extends Component {
         <Footer/>
         <style jsx>{`
           .rotate {
+            font-size: 1.8em;
             width: 100vw;
             display: flex;
             align-items: center;
@@ -175,14 +180,17 @@ export default class RotateMatrix extends Component {
           .input-matrix, .output-matrix {
             white-space: pre-wrap;
             text-align: justify;
+            font-size: .8em;
           }
 
           .display {
+            margin: 10px;
             width: 50vw;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
+            font-size: .8em;
           }
 
           input[type=text] {
@@ -195,6 +203,10 @@ export default class RotateMatrix extends Component {
             display: block;
             border: 1px solid black;
             margin: 8px;
+          }
+
+          .note {
+            font-size: 0.4em;
           }
         `}</style>
       </div>
