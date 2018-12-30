@@ -102,14 +102,13 @@ export default class RotateMatrix extends Component {
     e.target.value = '';
   }
 
-  rotateMatrix() {
-    let matrix;
+  rotateMatrix(matrix, output = []) {
+    
     if (this.state.outputMatrix.length === 0) {
       matrix = this.state.inputMatrix;
     } else {
       matrix = this.state.outputMatrix;
     }
-    let output = [];
     for (let i = 0; i < matrix.length; i++) {
       output.push(i);
     }
