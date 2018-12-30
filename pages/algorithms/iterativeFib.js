@@ -79,7 +79,6 @@ export default class IterativeFib extends Component {
     return <div className="container">
         <Meta />
         <Navbar />
-        Nth Fibonacci
         <div className="fibonacci">
           Input any number:
           <span className="note">
@@ -103,11 +102,12 @@ export default class IterativeFib extends Component {
               </button>
             </div>
           </div>
-          <div>Nth Fibonacci: {this.state.numberOutput}</div>
+          <div className='display'>Nth Fibonacci: {this.state.numberOutput}</div>
         </div>
         <Footer />
         <style jsx>{`
           .fibonacci {
+            margin: 20px;
             width: 100vw;
             display: flex;
             font-size: 2em;
@@ -117,6 +117,7 @@ export default class IterativeFib extends Component {
           }
 
           .input-container {
+            margin: 10px;
             display: flex;
             flex-direction: row;
           }
@@ -144,8 +145,12 @@ export default class IterativeFib extends Component {
             border: 1px solid black;
           }
 
+          .display {
+            margin: 10px;
+          }
+
           .note {
-            font-size: 0.4em;
+            font-size: 0.5em;
           }`}</style>
       </div>;
   }

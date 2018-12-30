@@ -103,7 +103,7 @@ export default class RotateMatrix extends Component {
   }
 
   rotateMatrix(matrix, output = []) {
-    
+
     if (this.state.outputMatrix.length === 0) {
       matrix = this.state.inputMatrix;
     } else {
@@ -163,11 +163,11 @@ export default class RotateMatrix extends Component {
                 }
               </div>
             </div>
-
           </div>
         <Footer/>
         <style jsx>{`
           .rotate {
+            margin-top: 20px;
             font-size: 1.8em;
             width: 100vw;
             display: flex;

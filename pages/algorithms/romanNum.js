@@ -8,17 +8,100 @@ export default class RomanNum extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      numeralInput: '',
+      numeralOutput: 0,
+      DIGIT_VALUES: {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+      }
     }
   }
+
+  handleNumeralInput(e) {
+    let num = e.target.value.toUpperCase();
+    let output = this.translateRomanNumeral(num);
+    this.setState({
+      numeralInput: num,
+      numeralOutput: output,
+    })
+  }
+
+  translateRomanNumeral(rn, o = 0) {
+    const DIGIT_VALUES = this.state.DIGIT_VALUES;
+    for (let i = 0; i < rn.length; i++) {
+      if (DIGIT_VALUES[rn[i]] === undefined) {
+        return 'null';
+      }
+      if (DIGIT_VALUES[rn[i]] < DIGIT_VALUES[rn[i + 1]]) {
+        o -= DIGIT_VALUES[rn[i]];
+      } else {
+        o += DIGIT_VALUES[rn[i]];
+      }
+    }
+    return o;
+  };
 
   render() {
     return(
       <div className='container'>
         <Meta/>
         <Navbar/>
-          Roman Numerals
+        Roman Numerals
+
+        <div className='romanNum'>
+          Input any Roman numeral:
+          <span className='note'>(Valid characters are I, V, X, L, C, D, M)</span>
+          <input 
+            pattern='/[i|v|x|l|c|d|m]/gi'
+            className='numeral-input'
+            value={this.state.numeralInput}
+            onInput={(e) => e.target.value = e.target.value.replace(/[^i|v|x|l|c|d|m]/gi, '')}
+            onChange={(e) => this.handleNumeralInput(e)}/>
+          <div>{this.state.numeralInput}</div>
+          <div className='numeral-output'>
+            <div>Converted Number:</div>
+            <div>{this.state.numeralOutput}</div>
+          </div>
+        </div>
         <Footer/>
+        <style jsx>{`
+          .romanNum {
+            margin: 20px;
+            width: 100vw;
+            display: flex;
+            font-size: 2em;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          input {
+            margin: 20px;
+            height: 80px;
+            width: 320px;
+            text-align: right;
+            font-size: 1.5em;
+            border: 1px black solid;
+            font-family: 'Fira Mono', monospace;
+          }
+
+          .numeral-output {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .note {
+            margin: 5px;
+            font-size: 0.5em;
+          }
+        `}</style>
       </div>
     )
   }
