@@ -21,7 +21,6 @@ export default class RotateMatrix extends Component {
 
   componentDidUpdate() {
     if (this.state.inputMatrix.length !== this.state.n) {
-      console.log('this.state.inputMatrix :', this.state.inputMatrix);
       this.generateMatrix();
     }
   }

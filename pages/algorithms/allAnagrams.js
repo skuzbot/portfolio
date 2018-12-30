@@ -8,8 +8,34 @@ export default class AllAnagrams extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      stringInput: '',
+      anagrams: [],
     }
+  }
+
+  handleStringInput(e) {
+    let str = e.target.value;
+    let anagrams = this.AllAnagrams(str);
+    this.setState({
+      stringInput: str,
+      anagrams: anagrams,
+    })
+  }
+
+  AllAnagrams(str, out = [], arr = str.split``) {
+    let perm;
+    (perm = (arr, acc = []) => {
+      for (let i = 0; i < arr.length; i++) {
+        let cur = arr.splice(i, 1);
+        if (!arr.length) {
+          out.push(acc.concat(cur).join ``);
+        }
+        perm(arr.slice(), acc.concat(cur));
+        arr.splice(i, 0, cur[0]);
+      }
+    })(arr);
+
+    return out.filter((v, i, a) => a.indexOf(v) === i);
   }
 
   render() {
@@ -18,7 +44,41 @@ export default class AllAnagrams extends Component {
         <Meta/>
         <Navbar/>
           All Anagrams
+          <div className='anagrams'>
+            Enter a string:
+            <input 
+              type='text'
+              maxLength='7'
+              onChange={(e) => this.handleStringInput(e)}
+              className='string-input'/>
+            <div>{this.state.stringInput}</div>
+            <p className='anagrams-output'>{JSON.stringify(this.state.anagrams)}</p>
+          </div>
         <Footer/>
+        <style jsx>{`
+          .anagrams {
+            margin: 20px;
+            width: 100vw;
+            display: flex;
+            font-size 2em;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          .anagrams-output {
+            text-wrap: wrap;
+          }
+
+          input {
+            height: 80px;
+            width: 320px;
+            text-align: center;
+            font-size: 1.5em;
+            border: 1px black solid;
+            font-family: 'Fira Mono', monospace;
+          }
+        `}</style>
       </div>
     )
   }
@@ -39,7 +99,7 @@ export default class AllAnagrams extends Component {
 
 // */
 // // -Start of Code-
-// allAnagrams = (str, out = [], arr = str.split ``) => {
+// allAnagrams = (str, out = [], arr = str.split``) => {
 
 //   //inner recursive permutatin function
 //   (perm = (arr, acc = []) => {
