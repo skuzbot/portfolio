@@ -10,26 +10,17 @@ export default class IslandCount extends Component {
     this.state = {
       width: 12,
       height: 8,
-      map: [
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
-      ],
+      map: [],
       count: 0,
     }
   }
 
   componentDidMount() {
     this.generateMap();
+  }
+
+  componentDidUpdate() {
+    this.calculateIslandCount()
   }
 
   generateMap() {
@@ -58,86 +49,109 @@ export default class IslandCount extends Component {
       }
       map.appendChild(row);
     }
+    this.applyMapToState();
   }
 
   handleCellToggle(e) {
     let type = e.target.name;
     let row = e.target.className.split('-')[2];
     let cell = e.target.className.split('-')[3];
-    console.log('name :', name);
-    console.log('row, cell :', row, cell);
-    if (type === 'water') {
+    let prevMap = this.state.map.slice();
+    
+    if (type === 'water' || type === 'sunk') {
       e.target.name = 'land';
       e.target.style['background-color'] = '#c8e6c9'
+      prevMap[row][cell] = 'land';
+      this.setState({
+        map: prevMap,
+      })
+      
     } else if (type === 'land') {
       e.target.name = 'water';
       e.target.style['background-color'] = '#e3f2fd';
+      prevMap[row][cell] = 'water';
+      this.setState({
+        map: prevMap,
+      })
     }
 
-    let prevMap = this.state.map;
-    prevMap[row][cell] = e.target.name;
-    console.log('prevMap[row][cell] :', prevMap[row][cell]);
-    this.setState({
-      map: prevMap,
-    }, () => {
-      this.calculateIslandCount();
-    })
   }
 
   calculateIslandCount() {
     let count = 0;
-      let map = this.state.map;
-      console.log('map :', map);
+    let mapCount = this.state.map.slice();
+    let prevMap = this.state.map.slice();
+    console.log('map :', mapCount);
+    console.log('this.state.map :', this.state.map);
 
-      const isOnMap = (row, col) => {
-        return ((row >= 0 && row < map.length) && (col >= 0 && col < map[0].length));
-      };
+    const isOnMap = (row, col) => {
+      return ((row >= 0 && row < mapCount.length) && (col >= 0 && col < mapCount[0].length));
+    };
 
-      const isLand = (row, col) => {
-        if (!isOnMap(row, col)) {
-          return false;
-        }
-        return (map[row][col] === 'land');
-      };
+    const isLand = (row, col) => {
+      if (!isOnMap(row, col)) {
+        return false;
+      }
+      return (mapCount[row][col] === 'land');
+    };
 
-      const sinkLand = (row, col) => {
-        map[row][col] = 'water';
-      };
+    const sinkLand = (row, col) => {
+      mapCount[row][col] = 'sunk';
+    };
 
-      const islandRecurse = (row, col) => {
-        if (isLand(row, col)) {
-          sinkLand(row, col);
-        }
-        if (isLand(row + 1, col)) {
-          sinkLand(row + 1, col);
-          islandRecurse(row + 1, col);
-        }
-        if (isLand(row - 1, col)) {
-          sinkLand(row - 1, col);
-          islandRecurse(row - 1, col);
-        }
-        if (isLand(row, col + 1)) {
-          sinkLand(row, col + 1);
-          islandRecurse(row, col + 1);
-        }
-        if (isLand(row, col - 1)) {
-          sinkLand(row, col - 1);
-          islandRecurse(row, col - 1);
-        }
-      };
+    const islandRecurse = (row, col) => {
+      if (isLand(row, col)) {
+        sinkLand(row, col);
+      }
+      if (isLand(row + 1, col)) {
+        sinkLand(row + 1, col);
+        islandRecurse(row + 1, col);
+      }
+      if (isLand(row - 1, col)) {
+        sinkLand(row - 1, col);
+        islandRecurse(row - 1, col);
+      }
+      if (isLand(row, col + 1)) {
+        sinkLand(row, col + 1);
+        islandRecurse(row, col + 1);
+      }
+      if (isLand(row, col - 1)) {
+        sinkLand(row, col - 1);
+        islandRecurse(row, col - 1);
+      }
+    };
 
 
-      for (let i = 0; i < map.length; i++) {
-        for (let j = 0, len = map[0].length; j < len; j++) {
-          if (map[i][j] === 'land') {
-            islandRecurse(i, j);
-            count++;
-          }
+    for (let i = 0; i < mapCount.length; i++) {
+      for (let j = 0, len = mapCount[0].length; j < len; j++) {
+        if (mapCount[i][j] === 'land') {
+          islandRecurse(i, j);
+          count++;
         }
       }
+    }
+    console.log('count :', count);
+    if (count !== this.state.count) {
+      this.setState({
+        map: prevMap,
+        count: count,
+      })
+    }
+    return count;
+  }
 
-      console.log('count :', count);
-      return count;
+  applyMapToState() {
+    let tempMap = [];
+    let map = document.getElementById('map');
+    let rows = map.children;
+    let arrRows = Array.from(rows, row => row.children);
+    arrRows.forEach(row => {
+      let arrCells = Array.from(row, cell => cell.name);
+      tempMap.push(arrCells);
+    })
+    this.setState({
+      map: tempMap,
+    })
   }
 
   render() {
@@ -151,6 +165,7 @@ export default class IslandCount extends Component {
             Island Count <span className='note'>(Toggle map cells to change between land and water. Islands do not connect diagonally)</span>
           <div id='map'>
           </div>
+          <div className='island-count-output'>{this.state.count}</div>
           </div>
         <Footer/>
         <style jsx>{`
