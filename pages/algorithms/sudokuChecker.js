@@ -9,21 +9,28 @@ export default class SudokuChecker extends Component {
     super(props)
     this.state = {
       sudoku: [
-        [7, 3, 5, 8, 1, 4, 2, 9, 6],
-        [8, 9, 6, 2, 7, 5, 3, 1, 4],
-        [2, 1, 4, 9, 6, 3, 8, 5, 7],
-        [5, 8, 9, 4, 2, 7, 1, 6, 3],
-        [3, 6, 2, 1, 8, 9, 7, 4, 5],
-        [4, 7, 1, 3, 5, 6, 9, 8, 2],
-        [9, 2, 3, 5, 4, 1, 6, 7, 8],
-        [6, 4, 8, 7, 9, 2, 5, 3, 1],
-        [1, 5, 7, 6, 3, 8, 4, 2, 9],
-      ]
+        ['7', '3', '5', '8', '1', '4', '2', '9', '6'],
+        ['8', '9', '6', '2', '7', '5', '3', '1', '4'],
+        ['2', '1', '4', '9', '6', '3', '8', '5', '7'],
+        ['5', '8', '9', '4', '2', '7', '1', '6', '3'],
+        ['3', '6', '2', '1', '8', '9', '7', '4', '5'],
+        ['4', '7', '1', '3', '5', '6', '9', '8', '2'],
+        ['9', '2', '3', '5', '4', '1', '6', '7', '8'],
+        ['6', '4', '8', '7', '9', '2', '5', '3', '1'],
+        ['1', '5', '7', '6', '3', '8', '4', '2', '9'],
+      ],
+      isSolved: true,
     }
   }
 
   componentDidMount() {
     this.generateSudokuMatrix();
+    this.sudokuCheck();
+  }
+
+  componentDidUpdate() {
+    
+    this.sudokuCheck();
   }
 
   generateSudokuMatrix() {
@@ -46,7 +53,7 @@ export default class SudokuChecker extends Component {
         cell.style.border = '1px solid black';
         cell.style['font-family'] = 'Fira Mono, monospace';
         cell.style['font-size'] = '.8em';
-        cell.oninput = (e) => e.target.value = e.target.value.replace(/[^1-9]/g, '');
+        cell.oninput = (e) => this.handleCellChange(e);
         cell.onclick = (e) => this.handleCellClick(e);
         if (j === 2) {
           cell.style['margin-right'] = '9px';
@@ -61,11 +68,108 @@ export default class SudokuChecker extends Component {
   }
 
   handleCellChange(e) {
-
+    let input = e.target.value;
+    let row = parseInt(e.target.className.charAt(12));
+    let cell = parseInt(e.target.className.charAt(14));
+    let prevMatrix = this.state.sudoku;
+    prevMatrix[row][cell] = input;
+    this.setState({
+      sudoku: prevMatrix,
+    })
   }
 
   handleCellClick(e) {
     e.target.value = '';
+    this.setState({
+      isSolved: false
+    })
+  }
+
+  sudokuCheck() {
+    let o = true;
+    let matrix = this.state.sudoku;
+
+    //check if rows contain dupes
+    matrix.forEach(row => {
+      if (row.filter((v, i, a) => a.indexOf(v) === i || v !== '').length !== row.length) {
+        o = false;
+      }
+    });
+
+    //rotate to check columns
+    let rotated = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    rotated = rotated.map(i => (
+      matrix.map(row => row[i])
+    ));
+
+    rotated.forEach(row => {
+      if (row.filter((v, i, a) => a.indexOf(v) === i).length !== row.length) {
+        o = false;
+      }
+    });
+
+    //make and check sub grids;
+    let subs = [];
+    subs[0] = [matrix[0][0], matrix[0][1], matrix[0][2],
+               matrix[1][0], matrix[1][1], matrix[1][2],
+               matrix[2][0], matrix[2][1], matrix[2][2]];
+
+    subs[1] = [matrix[0][3], matrix[0][4], matrix[0][5],
+               matrix[1][3], matrix[1][4], matrix[1][5],
+               matrix[2][3], matrix[2][4], matrix[2][5]];
+
+    subs[2] = [matrix[0][6], matrix[0][7], matrix[0][8],
+               matrix[1][6], matrix[1][7], matrix[1][8],
+               matrix[2][6], matrix[2][7], matrix[2][8]];
+
+    subs[3] = [matrix[3][0], matrix[3][1], matrix[3][2],
+               matrix[4][0], matrix[4][1], matrix[4][2],
+               matrix[5][0], matrix[5][1], matrix[5][2]];
+
+    subs[4] = [matrix[3][3], matrix[3][4], matrix[3][5],
+               matrix[4][3], matrix[4][4], matrix[4][5],
+               matrix[5][3], matrix[5][4], matrix[5][5]];
+
+    subs[5] = [matrix[3][6], matrix[3][7], matrix[3][8],
+               matrix[4][6], matrix[4][7], matrix[4][8],
+               matrix[5][6], matrix[5][7], matrix[5][8]];
+
+    subs[6] = [matrix[6][0], matrix[6][1], matrix[6][2],
+               matrix[7][0], matrix[7][1], matrix[7][2],
+               matrix[8][0], matrix[8][1], matrix[8][2]];
+
+    subs[7] = [matrix[6][3], matrix[6][4], matrix[6][5],
+               matrix[7][3], matrix[7][4], matrix[7][5],
+               matrix[8][3], matrix[8][4], matrix[8][5]];
+
+    subs[8] = [matrix[6][6], matrix[6][7], matrix[6][8],
+               matrix[7][6], matrix[7][7], matrix[7][8],
+               matrix[8][6], matrix[8][7], matrix[8][8]];
+
+    subs.forEach(row => {
+      if (row.filter((v, i, a) => a.indexOf(v) === i).length !== row.length) {
+        o = false;
+      }
+    });
+
+    if (this.state.isSolved !== o) {
+      this.setState({
+        isSolved: o,
+      })
+    }
+  };
+
+  renderResult() {
+    if (this.state.isSolved) {
+      return (
+        <div>Sudoku Solved!</div>
+      )
+    } else {
+      return (
+        <div>Invalid Solution</div>
+      )
+    }
   }
 
   render() {
@@ -81,7 +185,9 @@ export default class SudokuChecker extends Component {
             </span>
           <div id='sudoku-matrix'>
           </div>
-          <div className='test'>{this.state.sudoku}</div>
+          <div>
+          {this.renderResult()}
+          </div>
           </div>
         <Footer/>
         <style jsx>{`
