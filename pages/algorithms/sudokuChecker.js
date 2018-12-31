@@ -80,9 +80,7 @@ export default class SudokuChecker extends Component {
 
   handleCellClick(e) {
     e.target.value = '';
-    this.setState({
-      isSolved: false
-    })
+    this.handleCellChange(e);
   }
 
   sudokuCheck() {
@@ -91,7 +89,7 @@ export default class SudokuChecker extends Component {
 
     //check if rows contain dupes
     matrix.forEach(row => {
-      if (row.filter((v, i, a) => a.indexOf(v) === i || v !== '').length !== row.length) {
+      if (row.filter((v, i, a) => a.indexOf(v) === i).filter(v => v !== '').length !== row.length) {
         o = false;
       }
     });
@@ -104,7 +102,7 @@ export default class SudokuChecker extends Component {
     ));
 
     rotated.forEach(row => {
-      if (row.filter((v, i, a) => a.indexOf(v) === i).length !== row.length) {
+      if (row.filter((v, i, a) => a.indexOf(v) === i).filter(v => v !== '').length !== row.length) {
         o = false;
       }
     });
@@ -148,7 +146,7 @@ export default class SudokuChecker extends Component {
                matrix[8][6], matrix[8][7], matrix[8][8]];
 
     subs.forEach(row => {
-      if (row.filter((v, i, a) => a.indexOf(v) === i).length !== row.length) {
+      if (row.filter((v, i, a) => a.indexOf(v) === i).filter(v => v !== '').length !== row.length) {
         o = false;
       }
     });
