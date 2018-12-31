@@ -175,7 +175,6 @@ export default class SudokuChecker extends Component {
       <div className='container'>
         <Meta/>
         <Navbar/>
-          Sudoku Checker
           <div className='sudoku'>
             Sudoku Board:
             <span className='note'>
@@ -183,7 +182,7 @@ export default class SudokuChecker extends Component {
             </span>
           <div id='sudoku-matrix'>
           </div>
-          <div>
+          <div className='solved-status-display'>
           {this.renderResult()}
           </div>
           </div>
@@ -203,8 +202,8 @@ export default class SudokuChecker extends Component {
             margin-top: 20px;
           }
 
-          #sudoku-matrix div:nth-child(3n+3) {
-            margin: 5px;
+          .solved-status-display {
+            margin-top: 20px;
           }
 
           .note {

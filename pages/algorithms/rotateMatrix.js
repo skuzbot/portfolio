@@ -131,7 +131,7 @@ export default class RotateMatrix extends Component {
         <Navbar/>
           <div className='rotate'>
             Rotate Matrix <span className='note'>(Feel free to change cell values)</span>
-            <button name='increase' onClick={e => this.handleNChange(e)}>
+            <button name='increase' onClick={e => {if (this.state.n < 5) this.handleNChange(e)}}>
               ▲
             </button>
             <button name='decrease' onClick={e => this.handleNChange(e)}>
