@@ -87,7 +87,7 @@ export default class RotateMatrix extends Component {
     })
     this.setState({
       inputMatrix: tempMatrix,
-      outputMatrix: []
+      outputMatrix: [],
     })
   }
 

@@ -52,12 +52,12 @@ export default class AllAnagrams extends Component {
               onChange={(e) => this.handleStringInput(e)}
               className='string-input'/>
             <div>{this.state.stringInput}</div>
-            <p className='anagrams-output'>{JSON.stringify(this.state.anagrams)}</p>
+            <div className='anagrams-output'>{JSON.stringify(this.state.anagrams)}</div>
           </div>
         <Footer/>
         <style jsx>{`
           .anagrams {
-            margin: 20px;
+            margin: 20px 0;
             width: 100vw;
             display: flex;
             font-size 2em;
@@ -67,7 +67,10 @@ export default class AllAnagrams extends Component {
           }
 
           .anagrams-output {
-            text-wrap: wrap;
+            max-width: 100vw;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+
           }
 
           input {

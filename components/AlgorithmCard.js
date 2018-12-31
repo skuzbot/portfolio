@@ -62,9 +62,8 @@ const AlgorithCard = ({ algorithm }) => {
 
       <style jsx>{`
         .card-container {
-          width: auto;
           height: 300px;
-          margin: 30px 30px;
+          margin: 20px 30px;
         }
 
         .link {
@@ -76,7 +75,7 @@ const AlgorithCard = ({ algorithm }) => {
         .card {
           border: 1px solid black;
           padding: 0 28px;
-          margin: 10px 0;
+          margin: 0;
           width: 300px;
           height: 100%;
           display: flex;

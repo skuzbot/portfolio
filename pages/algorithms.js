@@ -38,7 +38,12 @@ export default class Algorithms extends Component {
         </div>
         <Footer/>
         <style jsx>{`
+          .container {
+
+          }
+          
           .algorithms-container {
+            width: 100vw;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;

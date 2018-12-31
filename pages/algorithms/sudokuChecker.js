@@ -8,8 +8,64 @@ export default class SudokuChecker extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      sudoku: [
+        [7, 3, 5, 8, 1, 4, 2, 9, 6],
+        [8, 9, 6, 2, 7, 5, 3, 1, 4],
+        [2, 1, 4, 9, 6, 3, 8, 5, 7],
+        [5, 8, 9, 4, 2, 7, 1, 6, 3],
+        [3, 6, 2, 1, 8, 9, 7, 4, 5],
+        [4, 7, 1, 3, 5, 6, 9, 8, 2],
+        [9, 2, 3, 5, 4, 1, 6, 7, 8],
+        [6, 4, 8, 7, 9, 2, 5, 3, 1],
+        [1, 5, 7, 6, 3, 8, 4, 2, 9],
+      ]
     }
+  }
+
+  componentDidMount() {
+    this.generateSudokuMatrix();
+  }
+
+  generateSudokuMatrix() {
+    let el = document.getElementById('sudoku-matrix');
+    for (let i = 0; i < 9; i++) {
+      let row = document.createElement('div');
+      row.className=`sudoku-row-${i}`;
+      if (i === 2 || i === 5) {
+        row.style['margin-bottom'] = '9px';
+      }
+      for (let j = 0; j < 9; j++) {
+        let cell = document.createElement('input');
+        cell.className = `sudoku-cell-${i}-${j}`;
+        cell.type = 'text';
+        cell.maxLength = '1';
+        cell.value = this.state.sudoku[i][j];
+        cell.style.width = '30px';
+        cell.style.height = '30px';
+        cell.style['text-align'] = 'center';
+        cell.style.border = '1px solid black';
+        cell.style['font-family'] = 'Fira Mono, monospace';
+        cell.style['font-size'] = '.8em';
+        cell.oninput = (e) => e.target.value = e.target.value.replace(/[^1-9]/g, '');
+        cell.onclick = (e) => this.handleCellClick(e);
+        if (j === 2) {
+          cell.style['margin-right'] = '9px';
+        }
+        if (j === 6) {
+          cell.style['margin-left'] = '9px';
+        }
+        row.appendChild(cell);
+      }
+      el.appendChild(row);
+    }
+  }
+
+  handleCellChange(e) {
+
+  }
+
+  handleCellClick(e) {
+    e.target.value = '';
   }
 
   render() {
@@ -18,7 +74,39 @@ export default class SudokuChecker extends Component {
         <Meta/>
         <Navbar/>
           Sudoku Checker
+          <div className='sudoku'>
+            Sudoku Board:
+            <span className='note'>
+              (I'll start you out with a valid solution. Edit to see changes)
+            </span>
+          <div id='sudoku-matrix'>
+          </div>
+          <div className='test'>{this.state.sudoku}</div>
+          </div>
         <Footer/>
+        <style jsx>{`
+          .sudoku {
+            margin-top: 20px;
+            font-size: 1.8em;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          #sudoku-matrix {
+            margin-top: 20px;
+          }
+
+          #sudoku-matrix div:nth-child(3n+3) {
+            margin: 5px;
+          }
+
+          .note {
+            font-size: 0.4em;
+          }
+        `}</style>
       </div>
     )
   }
@@ -94,3 +182,5 @@ export default class SudokuChecker extends Component {
 // */
 
 // console.log(sudokuCheck(input));
+
+
