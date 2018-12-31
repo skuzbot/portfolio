@@ -64,7 +64,8 @@ export default class IslandCount extends Component {
     let type = e.target.name;
     let row = e.target.className.split('-')[2];
     let cell = e.target.className.split('-')[3];
-
+    console.log('name :', name);
+    console.log('row, cell :', row, cell);
     if (type === 'water') {
       e.target.name = 'land';
       e.target.style['background-color'] = '#c8e6c9'
@@ -75,6 +76,7 @@ export default class IslandCount extends Component {
 
     let prevMap = this.state.map;
     prevMap[row][cell] = e.target.name;
+    console.log('prevMap[row][cell] :', prevMap[row][cell]);
     this.setState({
       map: prevMap,
     }, () => {
@@ -127,7 +129,7 @@ export default class IslandCount extends Component {
 
       for (let i = 0; i < map.length; i++) {
         for (let j = 0, len = map[0].length; j < len; j++) {
-          if (map[i][j] === 'water') {
+          if (map[i][j] === 'land') {
             islandRecurse(i, j);
             count++;
           }
