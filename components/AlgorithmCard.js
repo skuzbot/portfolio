@@ -32,10 +32,10 @@ const AlgorithCard = ({ algorithm }) => {
       graphic: '      #\n# - - #\n# # - #\n# # # #',
       fontSize: '2em',
     },
-    'Shuffle Deck': {
-      fileName: 'shuffleDeck',
-      graphic: '♥ ♣\n♠ ♦',
-      fontSize: '3.8em',
+    'Island Count': {
+      fileName: 'islandCount',
+      graphic: '0 - 0 - 0\n0 - - - 0\n0 0 0 0 0',
+      fontSize: '2em',
     },
     'Nth Fibonacci Number': {
       fileName: 'iterativeFib',

@@ -15,7 +15,7 @@ export default class Algorithms extends Component {
         'Sudoku Validator',
         'Parentheses Validator',
         'Water Blocks',
-        'Shuffle Deck',
+        'Island Count',
         'Nth Fibonacci Number',
       ],
     }
@@ -39,15 +39,15 @@ export default class Algorithms extends Component {
         <Footer/>
         <style jsx>{`
           .container {
-
           }
           
           .algorithms-container {
+            margin: 0 auto;
             width: 100vw;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content; space-between;
+            justify-content; space-evenly;
           }
         `}</style>
         

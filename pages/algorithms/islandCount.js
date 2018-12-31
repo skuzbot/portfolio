@@ -1,0 +1,263 @@
+import { Component } from 'react';
+import Meta from '../../components/Meta'
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
+
+
+export default class IslandCount extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      width: 12,
+      height: 8,
+      map: [
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+        ['water', 'water', 'water', 'water', 'water', 'water', 'water', 'water'],
+      ],
+      count: 0,
+    }
+  }
+
+  componentDidMount() {
+    this.generateMap();
+  }
+
+  generateMap() {
+    let width = this.state.width;
+    let height = this.state.height;
+    let map = document.getElementById('map');
+    for (let i = 0; i < height; i++) {
+      let row = document.createElement('div');
+      row.className = `map-row-${i}`;
+      for (let j = 0; j < width; j++) {
+        let cell = document.createElement('button');
+        cell.className = `map-cell-${i}-${j}`;
+        cell.name = 'water';
+        cell.maxLength = '1';
+        cell.style.width = '40px';
+        cell.style.height = '40px';
+        cell.style['text-align'] = 'center';
+        cell.style.border = '1px solid black';
+        cell.style['font-family'] = 'Fira Mono, monospace';
+        cell.style['font-size'] = '.8em';
+        cell.style.margin = '1px 2px';
+        cell.style['background-color'] = '#e3f2fd';
+        cell.onclick = (e) => this.handleCellToggle(e);
+
+        row.appendChild(cell);
+      }
+      map.appendChild(row);
+    }
+  }
+
+  handleCellToggle(e) {
+    let type = e.target.name;
+    let row = e.target.className.split('-')[2];
+    let cell = e.target.className.split('-')[3];
+
+    if (type === 'water') {
+      e.target.name = 'land';
+      e.target.style['background-color'] = '#c8e6c9'
+    } else if (type === 'land') {
+      e.target.name = 'water';
+      e.target.style['background-color'] = '#e3f2fd';
+    }
+
+    let prevMap = this.state.map;
+    prevMap[row][cell] = e.target.name;
+    this.setState({
+      map: prevMap,
+    }, () => {
+      this.calculateIslandCount();
+    })
+  }
+
+  calculateIslandCount() {
+    let count = 0;
+      let map = this.state.map;
+      console.log('map :', map);
+
+      const isOnMap = (row, col) => {
+        return ((row >= 0 && row < map.length) && (col >= 0 && col < map[0].length));
+      };
+
+      const isLand = (row, col) => {
+        if (!isOnMap(row, col)) {
+          return false;
+        }
+        return (map[row][col] === 'land');
+      };
+
+      const sinkLand = (row, col) => {
+        map[row][col] = 'water';
+      };
+
+      const islandRecurse = (row, col) => {
+        if (isLand(row, col)) {
+          sinkLand(row, col);
+        }
+        if (isLand(row + 1, col)) {
+          sinkLand(row + 1, col);
+          islandRecurse(row + 1, col);
+        }
+        if (isLand(row - 1, col)) {
+          sinkLand(row - 1, col);
+          islandRecurse(row - 1, col);
+        }
+        if (isLand(row, col + 1)) {
+          sinkLand(row, col + 1);
+          islandRecurse(row, col + 1);
+        }
+        if (isLand(row, col - 1)) {
+          sinkLand(row, col - 1);
+          islandRecurse(row, col - 1);
+        }
+      };
+
+
+      for (let i = 0; i < map.length; i++) {
+        for (let j = 0, len = map[0].length; j < len; j++) {
+          if (map[i][j] === 'water') {
+            islandRecurse(i, j);
+            count++;
+          }
+        }
+      }
+
+      console.log('count :', count);
+      return count;
+  }
+
+  render() {
+    return(
+      <div className='container'>
+        <Meta/>
+        <Navbar/>
+          Island Count
+
+          <div className='island-count'>
+            Island Count <span className='note'>(Toggle map cells to change between land and water. Islands do not connect diagonally)</span>
+          <div id='map'>
+          </div>
+          </div>
+        <Footer/>
+        <style jsx>{`
+          .island-count {
+            margin-top: 20px;
+            font-size: 1.8em;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          #map {
+            margin-top: 20px;
+            button: {
+              outline:
+            }
+          }
+
+          button:focus {
+            outline: none;
+          }
+
+          .note {
+            font-size: 0.4em;
+          }
+        `}</style>
+      </div>
+    )
+  }
+}
+
+
+// /*
+// Output:
+
+// Input:
+
+// Constrains/Conditions:
+
+// Examples/Edge Cases:
+
+
+// */
+// // -Start of Code-                                                 ===
+// countIslands = (mapStr) => {
+//   let count = 0;
+//   let map = mapStr.split('\n').map(row => row.split(''));
+
+//   const isOnMap = (row, col) => {
+//     return ((row >= 0 && row < map.length) && (col >= 0 && col < map[0].length));
+//   };
+
+//   const isLand = (row, col) => {
+//     if (!isOnMap(row, col)) {
+//       return false;
+//     }
+//     return (map[row][col] === '0');
+//   };
+
+//   const sinkLand = (row, col) => {
+//     map[row][col] = '.';
+//   };
+
+//   const islandRecurse = (row, col) => {
+//     if (isLand(row, col)) {
+//       sinkLand(row, col);
+//     }
+//     if (isLand(row + 1, col)) {
+//       sinkLand(row + 1, col);
+//       islandRecurse(row + 1, col);
+//     }
+//     if (isLand(row - 1, col)) {
+//       sinkLand(row - 1, col);
+//       islandRecurse(row - 1, col);
+//     }
+//     if (isLand(row, col + 1)) {
+//       sinkLand(row, col + 1);
+//       islandRecurse(row, col + 1);
+//     }
+//     if (isLand(row, col - 1)) {
+//       sinkLand(row, col - 1);
+//       islandRecurse(row, col - 1);
+//     }
+//   };
+
+
+//   for (let i = 0; i < map.length; i++) {
+//     for (let j = 0, len = map[0].length; j < len; j++) {
+//       if (map[i][j] === '0') {
+//         islandRecurse(i, j);
+//         count++;
+//       }
+//     }
+//   }
+
+//   return count;
+// };
+// // -End of Code-                                                   ===
+
+// // given tests:
+
+// const input = '0...0\n0...0\n00000';
+// console.log(`input :\n${input}`);
+
+// console.log(countIslands(input));
+
+// // let arr =
+// // ['.0...', 
+// //  '.00..', 
+// //  '....0'];
