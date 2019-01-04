@@ -41,13 +41,13 @@ export default class Navbar extends Component {
               </a>
             </div>
           </Link>
-          <Link href='/resume'>
+          {/* <Link href='/resume'>
             <div className='resume navbar-item'>
               <a className='link'>
                 Resume
               </a>
             </div>
-          </Link>
+          </Link> */}
           <style jsx>{`
             .navbar-container {
               width: auto;

@@ -18,6 +18,9 @@ export default class WaterBlock extends Component {
         <Meta/>
         <Navbar/>
           Water Blocks
+          <div className='waterBlock'>
+            
+          </div>
         <Footer/>
       </div>
     )

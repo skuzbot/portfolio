@@ -9,7 +9,7 @@ const About = (props) => {
       <Meta/>
       <Navbar/>
       <div>
-        About Me:
+        I'm Steven Duncan, a full stack engineer who loves to write applications in Javascript.
       </div>
       <Footer/>
     </div>

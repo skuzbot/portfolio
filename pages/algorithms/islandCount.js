@@ -78,7 +78,7 @@ export default class IslandCount extends Component {
   }
 
   calculateIslandCount() {
-    let count = 0;
+    let count = this.state.count;
     let mapCount = this.state.map.slice();
     let prevMap = this.state.map.slice();
     console.log('map :', mapCount);
@@ -131,13 +131,13 @@ export default class IslandCount extends Component {
       }
     }
     console.log('count :', count);
+
     if (count !== this.state.count) {
       this.setState({
-        map: prevMap,
+        // map: prevMap,
         count: count,
       })
     }
-    return count;
   }
 
   applyMapToState() {

@@ -44,6 +44,14 @@ const AlgorithCard = ({ algorithm }) => {
     }
   }
 
+  const renderComingSoon = () => {
+    if (algorithm === 'Island Count') {
+      return (
+        <div className='coming-soon'>Coming Soon!</div>
+      )
+    }
+  }
+
   return (
     <div className='card-container'>
       <Link as={`/algorithms/${algorithmData[algorithm].fileName}`} href={`${algorithmData[algorithm].fileName}`}>
@@ -52,6 +60,7 @@ const AlgorithCard = ({ algorithm }) => {
             <div className='title'>
               {algorithm}
             </div>
+            {algorithm === 'Island Count' || algorithm === 'Water Blocks' || algorithm === 'Parentheses Validator'? <div className='coming-soon'>Coming Soon!</div> : null}
             <div className='graphic'>
               {`${algorithmData[algorithm].graphic}`}
             </div>
@@ -93,6 +102,10 @@ const AlgorithCard = ({ algorithm }) => {
           white-space:pre-wrap;
           font-size: ${algorithmData[algorithm].fontSize};
           flex-grow: .5;
+        }
+
+        .coming-soon {
+          color: red;
         }
         
       `}</style>
