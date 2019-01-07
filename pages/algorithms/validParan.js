@@ -42,7 +42,6 @@ export default class ValidParan extends Component {
   cyclePresets(e) {
     // e.preventDefault();
     let direction = e.target.name;
-    console.log('direction :', direction);
     let currentPresetIndex = this.state.nextPresetIndex;
 
     if (direction === 'prev') {
@@ -81,7 +80,6 @@ export default class ValidParan extends Component {
     for (let i = 0; i < o.length; i += 0.5) { 
       o = o.replace(rx2, '');
     }
-    console.log('v.includes(o) :', v.includes(o));
     let isValid = v.includes(o);
     if (isValid !== this.state.isValid) {
       this.setState({
