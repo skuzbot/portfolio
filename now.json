@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "alias": ["stevenduncan.app", "www.stevenduncan.app"],
+  "alias": ["stevenduncan-portfolio.now.sh", "www.stevenduncan-portfolio.now.sh"],
   "builds": [
     { "src": "package.json", "use": "@now/next" }
   ]
