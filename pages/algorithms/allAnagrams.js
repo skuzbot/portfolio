@@ -43,7 +43,6 @@ export default class AllAnagrams extends Component {
       <div className='container'>
         <Meta/>
         <Navbar/>
-          All Anagrams
           <div className='anagrams'>
             Enter a string:
             <input 
@@ -60,13 +59,14 @@ export default class AllAnagrams extends Component {
             margin: 20px 0;
             width: 100vw;
             display: flex;
-            font-size 2em;
+            font-size: 2em;
             align-items: center;
             flex-direction: column;
             justify-content: space-between;
           }
 
           .anagrams-output {
+            margin-top: 20px;
             max-width: 100vw;
             overflow-wrap: break-word;
             white-space: pre-wrap;

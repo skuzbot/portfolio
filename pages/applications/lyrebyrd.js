@@ -20,8 +20,8 @@ const lyrebyrd = (props) => {
         <div className='screenshots'>
           <img className='image'src='../../static/LyreByrd-screenshot-01.png'/>
           <div className='stream-screenshots'>
-            <img className='image'src='../../static/LyreByrd-screenshot-02.png'/>
-            <img className='image'src='../../static/LyreByrd-screenshot-03.png'/>
+            <img className='image-stream'src='../../static/LyreByrd-screenshot-02.png'/>
+            <img className='image-stream'src='../../static/LyreByrd-screenshot-03.png'/>
           </div>
         </div>
       </div>
@@ -31,6 +31,7 @@ const lyrebyrd = (props) => {
           display: flex;
           align-items: center;
           flex-direction: column;
+          justify-content: center;
         }
 
         .title {
@@ -54,12 +55,17 @@ const lyrebyrd = (props) => {
         .stream-screenshots {
           display: flex;
           flex-direction: column;
-          justify content: space-between;
+          justify-content: space-between;
         }
 
         .image {
           margin: 10px;
-          width: 30%;
+          width: 50%;
+        }
+
+        .image-stream {
+          width: 80%;
+          margin-bottom: 10px;
         }
       `}</style>
     </div>

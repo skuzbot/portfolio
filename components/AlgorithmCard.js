@@ -22,9 +22,9 @@ const AlgorithCard = ({ algorithm }) => {
       graphic: '┏ ┳ ┳ ┓\n┣ ╋ ╋ ┫\n┣ ╋ ╋ ┫\n┗ ┻ ┻ ┛',
       fontSize: '1.8em',
     },
-    'Parentheses Validator': {
+    'Bracket Validator': {
       fileName: 'validParan',
-      graphic: '((()))',
+      graphic: '{[()]}',
       fontSize: '3.5em',
     },
     'Water Blocks': {
@@ -60,7 +60,7 @@ const AlgorithCard = ({ algorithm }) => {
             <div className='title'>
               {algorithm}
             </div>
-            {algorithm === 'Island Count' || algorithm === 'Water Blocks' || algorithm === 'Parentheses Validator'? <div className='coming-soon'>Coming Soon!</div> : null}
+            {algorithm === 'Island Count' || algorithm === 'Water Blocks' ? <div className='coming-soon'>Coming Soon!</div> : null}
             <div className='graphic'>
               {`${algorithmData[algorithm].graphic}`}
             </div>

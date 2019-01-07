@@ -13,7 +13,7 @@ export default class Algorithms extends Component {
         'Roman to Number',
         'All Anagrams',
         'Sudoku Validator',
-        'Parentheses Validator',
+        'Bracket Validator',
         'Water Blocks',
         'Island Count',
         'Nth Fibonacci Number',
