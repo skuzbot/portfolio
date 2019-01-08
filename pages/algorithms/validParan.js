@@ -25,22 +25,20 @@ export default class ValidParan extends Component {
     }
   }
 
-  componentDidUpdate() {
-    this.validateBrackets(this.state.input);
-  }
-
   handleInputChange(e) {
     e.preventDefault();
     let str = e.target.value;
-    // let isValid = this.validateBrackets();
     this.setState({
       input: str,
-      // isValid: isValid
+    }, () => {
+      let isValid = this.validateBrackets(this.state.input);
+      this.setState({
+        isValid: isValid
+      })
     })
   }
 
   cyclePresets(e) {
-    // e.preventDefault();
     let direction = e.target.name;
     let currentPresetIndex = this.state.nextPresetIndex;
 
@@ -81,11 +79,8 @@ export default class ValidParan extends Component {
       o = o.replace(rx2, '');
     }
     let isValid = v.includes(o);
-    if (isValid !== this.state.isValid) {
-      this.setState({
-        isValid: isValid,
-      })
-    }
+
+    return isValid
   }
 
   render() {
@@ -159,46 +154,3 @@ export default class ValidParan extends Component {
   }
 }
 
-// /*
-// Output:
-
-// Input:
-
-// Constrains/Conditions:
-
-// determine if balance of parenthasis are valid
-
-// Examples/Edge Cases:
-
-// "()"              =>  true
-// ")(()))"          =>  false
-// "("               =>  false
-// "(())((()())())"  =>  true
-
-// */
-// // -Start of Code-                                                 ===
-
-// validParentheses = par => {
-//   if (par[0] === ')' || par.length % 2 !== 0) {
-//     return false;
-//   }
-//   par.replace(/\w|\d/, '');
-
-//   while (par.length > 2) {
-//     par = par.split('()').join('');
-//   }
-//   if (par === '()' || par.length === 0) {
-//     return true;
-//   }
-//   return false;
-// };
-
-
-// // -End of Code-                                                   ===
-
-// // given tests:
-
-// const input = '(())((()())())';
-
-
-// console.log(validParentheses(input));
