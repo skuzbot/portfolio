@@ -25,16 +25,15 @@ export default class ValidParan extends Component {
     }
   }
 
+  componentDidUpdate() {
+    this.validateBrackets(this.state.input)
+  }
+
   handleInputChange(e) {
     e.preventDefault();
     let str = e.target.value;
     this.setState({
       input: str,
-    }, () => {
-      let isValid = this.validateBrackets(this.state.input);
-      this.setState({
-        isValid: isValid
-      })
     })
   }
 
@@ -79,8 +78,11 @@ export default class ValidParan extends Component {
       o = o.replace(rx2, '');
     }
     let isValid = v.includes(o);
-
-    return isValid
+    if (isValid !== this.state.isValid) {
+      this.setState({
+        isValid: isValid
+      })
+    }
   }
 
   render() {
