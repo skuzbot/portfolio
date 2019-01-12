@@ -91,6 +91,7 @@ export default class WaterBlock extends Component {
     let tempBlockArray = this.state.blockArray;
     tempBlockArray[col] = parseInt(this.state.y - row - 1);
     console.log('tempBlockArray :', tempBlockArray);
+    // todo my x and y are swapped here. need to fix
     this.setState({
       blockArray: tempBlockArray,
     })
@@ -138,6 +139,7 @@ export default class WaterBlock extends Component {
 
   makeItRain(b, w = 0) {
     b = this.state.blockArray;
+    console.log('b :', b);
     //loop through blocks skipping first and last
     for (let i = 1; i < b.length - 1; i++) {
       console.log('i :', i);
@@ -154,7 +156,7 @@ export default class WaterBlock extends Component {
         w += min - b[i];
       }
       // ! needs to be fixed
-      // for (let j = min; j > 0; j--) {
+      // for () {
       //   let cell = document.getElementById(`matrix-cell-${j}-${i}`)
         
       //   cell.name = 'water';
