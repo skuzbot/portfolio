@@ -3,7 +3,6 @@ import Meta from '../../components/Meta'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-//todo reset blockArray on resize
 export default class WaterBlock extends Component {
   constructor(props) {
     super(props)
@@ -61,11 +60,9 @@ export default class WaterBlock extends Component {
       let tempCells = Array.from(row, cell => cell.name);
       tempMatrix.push(tempCells)
     })
-    console.log('tempMatrix :', tempMatrix);
     for (let i = 0; i < tempMatrix[0].length; i++) {
       tempBlockArray.push(0);
     }
-    console.log('tempBlockArray :', tempBlockArray);
 
     this.setState({
       matrix: tempMatrix,
@@ -91,7 +88,6 @@ export default class WaterBlock extends Component {
     }
     let tempBlockArray = this.state.blockArray;
     tempBlockArray[col] = parseInt(this.state.x - row);
-    console.log('tempBlockArray :', tempBlockArray);
     this.setState({
       blockArray: tempBlockArray,
     })
@@ -142,35 +138,32 @@ export default class WaterBlock extends Component {
   makeItRain(b, w = 0) {
     b = this.state.blockArray;
     let height = this.state.x;
-    console.log('height :', height);
-    console.log('b :', b);
     //loop through blocks skipping first and last
     for (let i = 1; i < b.length - 1; i++) {
-      console.log('i :', i);
       //find the highest block on the left side
       let hiLeft = Math.max(...b.slice(0, i));
       //get the highest block on the right side
       let hiRight = Math.max(...b.slice(i + 1));
       //find the minimum between two highest
       let min = Math.min(hiLeft, hiRight);
-      console.log('min :', min);
       //check if i is at least 1 less than min
       if (b[i] < min) {
         //water is space between min and i
         w += min - b[i];
 
-        for (let j = height - min; j < height; j++) {
-          console.log('j :', j);
-          console.log('min - b[i] :', min - b[i]);
+        for (let j = 0; j < height; j++) {
           let cell = document.getElementById(`matrix-cell-${j}-${i}`)
           if (cell.name === 'air') {
             cell.name = 'water';
             cell.style['background-color'] = '#e3f2fd';
           }
+          if (j < height - min) {
+            cell.name = 'air';
+            cell.style['background-color'] = '#ffffff';
+          }
         }
       }
     }
-    console.log('w :', w);
     this.setState({
       waterVolume: w,
     })
