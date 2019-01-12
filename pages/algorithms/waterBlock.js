@@ -8,8 +8,46 @@ export default class WaterBlock extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      x: 5,
+      y: 5,
     }
+  }
+
+  componentDidMount() {
+    this.generateMatrix()
+  }
+  
+  generateMatrix() {
+    let x = this.state.x
+    let y = this.state.y
+    let el = document.getElementById('matrix');
+    for (let i = 0; i < x; i++) {
+      let row = document.createElement('div');
+      row.className = `matrix-row${i}`
+      for (let j = 0; j < y; j++) {
+        let cell = document.createElement('button')
+        cell.className = `matrix-cell-${i}-${j}`
+        cell.name = 'air';
+        cell.style.width = '40px';
+        cell.style.height = '40px';
+        cell.style.border = '1px solid black';
+        cell.style.margin = '1px 3px';
+        row.appendChild(cell);
+        cell.onclick = e => this.handleCellToggle(e);
+      }
+      el.appendChild(row);
+    }
+  }
+
+  applyMatrixToState() {
+    tempMatrix = []
+  }
+
+  handleCellToggle(e) {
+    let type = e.target.name;
+    let row = e.target.className.split('-')[2];
+    let col = e.target.className.split('-')[3]; 
+
   }
 
   render() {
@@ -17,11 +55,54 @@ export default class WaterBlock extends Component {
       <div className='container'>
         <Meta/>
         <Navbar/>
-          Water Blocks
           <div className='waterBlock'>
-            
+            Water Blocks
+            <span className='note'>(Toggle cells between blocks and air. Make it rain to see how much water is retained in the blocks.)</span>
+            <div className='x-y-buttons'>
+              x:
+              <button className='matrix-button' name='x-decrease'>◀</button>
+              <button className='matrix-button' name='x-increase'>▶</button>
+              y:
+              <button className='matrix-button' name='y-increase'>▲</button>
+              <button className='matrix-button' name='y-decrease'>▼</button>
+            </div>
+            <div id='matrix'></div>
           </div>
         <Footer/>
+        <style jsx>{`
+          .waterBlock {
+            margin-top: 20px;
+            font-size: 1.8em;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+
+          #matrix {
+            margin-top: 20px;
+          }
+
+          .x-y-buttons {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            font-size: .7em;
+          }
+
+          .matrix-button {
+            width: 25px;
+            height: 25px;
+            border: 1px solid black;
+            margin-right: 10px;
+
+          }
+
+          .note {
+            font-size: 0.4em;
+          }
+        `}</style>
       </div>
     )
   }
