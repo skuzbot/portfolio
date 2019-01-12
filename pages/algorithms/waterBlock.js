@@ -151,10 +151,6 @@ export default class WaterBlock extends Component {
       }
       for (let j = 0; j < height; j++) {
         let cell = document.getElementById(`matrix-cell-${j}-${i}`)
-        if (cell.name === 'water') {
-          cell.name = 'air'
-          cell.style['background-color'] = '#ffffff'
-        }
         if (cell.name === 'air') {
           cell.name = 'water';
           cell.style['background-color'] = '#e3f2fd';
