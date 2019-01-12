@@ -155,7 +155,7 @@ export default class WaterBlock extends Component {
           cell.name = 'water';
           cell.style['background-color'] = '#e3f2fd';
         }
-        if (j < height - min) {
+        if (j < height - min && cell.name !== 'block') {
           cell.name = 'air';
           cell.style['background-color'] = '#ffffff';
         }
