@@ -8,13 +8,16 @@ export default class WaterBlock extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loaded: false,
       x: 5,
       y: 5,
     }
   }
 
   componentDidMount() {
-    this.generateMatrix()
+    if (this.state.loaded === false) {
+      this.generateMatrix()
+    }
   }
   
   generateMatrix() {
@@ -37,17 +40,54 @@ export default class WaterBlock extends Component {
       }
       el.appendChild(row);
     }
+    this.setState({
+      loaded: true
+    })
   }
 
-  applyMatrixToState() {
-    tempMatrix = []
-  }
+  // applyMatrixToState() {
+  //   tempMatrix = []
+  // }
 
-  handleCellToggle(e) {
+  handleCellToggle(e) { // todo
     let type = e.target.name;
     let row = e.target.className.split('-')[2];
     let col = e.target.className.split('-')[3]; 
+  }
 
+  handleMatrixResize(e) {
+    
+    let axis = e.target.name.split('-')[0]
+    let direction = e.target.name.split('-')[1];
+
+    const removeMatrix = () => {
+      let el = document.getElementById('matrix');
+      while(el.lastChild) {
+        el.removeChild(el.lastChild);
+      }
+    }
+    
+    if (axis === 'height') {
+      let prevHeight = this.state.x;
+      let newHeight = direction === 'increase' ? prevHeight + 1 : prevHeight - 1;
+      
+      if (newHeight < 11 && newHeight > 1) {
+        removeMatrix();
+        this.setState({
+          x: newHeight
+        }, () => this.generateMatrix())
+      }
+    } else {
+      let prevWidth = this.state.y;
+      let newWidth = direction === 'increase' ? prevWidth + 1 : prevWidth - 1;
+      
+      if (newWidth < 21 && newWidth > 2) {
+        removeMatrix();
+        this.setState({
+          y: newWidth
+        }, () => this.generateMatrix())
+      }
+    }
   }
 
   render() {
@@ -59,12 +99,12 @@ export default class WaterBlock extends Component {
             Water Blocks
             <span className='note'>(Toggle cells between blocks and air. Make it rain to see how much water is retained in the blocks.)</span>
             <div className='x-y-buttons'>
-              x:
-              <button className='matrix-button' name='x-decrease'>◀</button>
-              <button className='matrix-button' name='x-increase'>▶</button>
-              y:
-              <button className='matrix-button' name='y-increase'>▲</button>
-              <button className='matrix-button' name='y-decrease'>▼</button>
+              height:
+              <button className='matrix-button' name='height-increase' onClick={(e) => this.handleMatrixResize(e)}>▲</button>
+              <button className='matrix-button' name='height-decrease' onClick={(e) => this.handleMatrixResize(e)}>▼</button>
+              width:
+              <button className='matrix-button' name='width-decrease' onClick={(e) => this.handleMatrixResize(e)}>◀</button>
+              <button className='matrix-button' name='width-increase' onClick={(e) => this.handleMatrixResize(e)}>▶</button>
             </div>
             <div id='matrix'></div>
           </div>
