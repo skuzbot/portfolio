@@ -70,20 +70,17 @@ export default class WaterBlock extends Component {
     })
   }
 
-  handleCellToggle(e) { // todo
+  handleCellToggle(e) { 
     let row = e.target.id.split('-')[2];
-    console.log('row :', row);
     let col = e.target.id.split('-')[3];
     for (let i = 0; i < this.state.x; i++) {
       let cell = document.getElementById(`matrix-cell-${i}-${col}`)
       if (i < row) {
         cell.name = 'air';
         cell.style['background-color'] = '#ffffff'
-        console.log('cell :', cell);
       } else {
         cell.name = 'block';
         cell.style['background-color'] = '#bdbdbd';
-        console.log('cell :', cell);
       }
     }
     let tempBlockArray = this.state.blockArray;
@@ -151,16 +148,20 @@ export default class WaterBlock extends Component {
         //water is space between min and i
         w += min - b[i];
 
-        for (let j = 0; j < height; j++) {
-          let cell = document.getElementById(`matrix-cell-${j}-${i}`)
-          if (cell.name === 'air') {
-            cell.name = 'water';
-            cell.style['background-color'] = '#e3f2fd';
-          }
-          if (j < height - min) {
-            cell.name = 'air';
-            cell.style['background-color'] = '#ffffff';
-          }
+      }
+      for (let j = 0; j < height; j++) {
+        let cell = document.getElementById(`matrix-cell-${j}-${i}`)
+        if (cell.name === 'water') {
+          cell.name = 'air'
+          cell.style['background-color'] = '#ffffff'
+        }
+        if (cell.name === 'air') {
+          cell.name = 'water';
+          cell.style['background-color'] = '#e3f2fd';
+        }
+        if (j < height - min) {
+          cell.name = 'air';
+          cell.style['background-color'] = '#ffffff';
         }
       }
     }
