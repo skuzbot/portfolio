@@ -53,7 +53,10 @@ export default class SudokuChecker extends Component {
         cell.style.border = '1px solid black';
         cell.style['font-family'] = 'Fira Mono, monospace';
         cell.style['font-size'] = '.8em';
-        cell.oninput = (e) => this.handleCellChange(e);
+        cell.oninput = (e) => {
+          e.target.value = e.target.value.replace(/[^1-9]/gi, '')
+          this.handleCellChange(e)
+        };
         cell.onclick = (e) => this.handleCellClick(e);
         if (j === 2) {
           cell.style['margin-right'] = '9px';
@@ -69,6 +72,7 @@ export default class SudokuChecker extends Component {
 
   handleCellChange(e) {
     let input = e.target.value;
+    console.log('input :', input);
     let row = parseInt(e.target.className.charAt(12));
     let cell = parseInt(e.target.className.charAt(14));
     let prevMatrix = this.state.sudoku;
