@@ -3,7 +3,7 @@ import Meta from '../../components/Meta'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-
+//todo reset blockArray on resize
 export default class WaterBlock extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +18,7 @@ export default class WaterBlock extends Component {
   }
 
   componentDidMount() {
-    if (this.state.loaded === false) {
+    if (!this.state.loaded) {
       this.generateMatrix()
       this.applyMatrixToState()
     }
@@ -69,6 +69,7 @@ export default class WaterBlock extends Component {
 
     this.setState({
       matrix: tempMatrix,
+      blockArray: tempBlockArray
     })
   }
 
@@ -89,7 +90,7 @@ export default class WaterBlock extends Component {
       }
     }
     let tempBlockArray = this.state.blockArray;
-    tempBlockArray[col] = parseInt(this.state.y - row - 1);
+    tempBlockArray[col] = parseInt(this.state.x - row);
     console.log('tempBlockArray :', tempBlockArray);
     // todo my x and y are swapped here. need to fix
     this.setState({
