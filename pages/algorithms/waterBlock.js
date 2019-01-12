@@ -10,13 +10,17 @@ export default class WaterBlock extends Component {
     this.state = {
       loaded: false,
       x: 5,
-      y: 5,
+      y: 6,
+      matrix: [],
+      blockArray: [0, 0, 0, 0, 0, 0],
+      waterVolume: 0,
     }
   }
 
   componentDidMount() {
     if (this.state.loaded === false) {
       this.generateMatrix()
+      this.applyMatrixToState()
     }
   }
   
@@ -24,17 +28,19 @@ export default class WaterBlock extends Component {
     let x = this.state.x
     let y = this.state.y
     let el = document.getElementById('matrix');
+
     for (let i = 0; i < x; i++) {
       let row = document.createElement('div');
       row.className = `matrix-row${i}`
       for (let j = 0; j < y; j++) {
         let cell = document.createElement('button')
-        cell.className = `matrix-cell-${i}-${j}`
+        cell.id = `matrix-cell-${i}-${j}`
         cell.name = 'air';
         cell.style.width = '40px';
         cell.style.height = '40px';
         cell.style.border = '1px solid black';
         cell.style.margin = '1px 3px';
+        cell.style['background-color'] = cell.name === 'air' ? '#ffffff' : cell.name === 'block' ? '#bdbdbd' : '#e3f2fd';
         row.appendChild(cell);
         cell.onclick = e => this.handleCellToggle(e);
       }
@@ -45,18 +51,52 @@ export default class WaterBlock extends Component {
     })
   }
 
-  // applyMatrixToState() {
-  //   tempMatrix = []
-  // }
+  applyMatrixToState() {
+    let tempMatrix = [];
+    let tempBlockArray = [];
+    let matrix = document.getElementById('matrix');
+    let rows = matrix.children;
+    let tempRows = Array.from (rows, row => row.children);
+    tempRows.forEach(row => {
+      let tempCells = Array.from(row, cell => cell.name);
+      tempMatrix.push(tempCells)
+    })
+    console.log('tempMatrix :', tempMatrix);
+    for (let i = 0; i < tempMatrix[0].length; i++) {
+      tempBlockArray.push(0);
+    }
+    console.log('tempBlockArray :', tempBlockArray);
+
+    this.setState({
+      matrix: tempMatrix,
+    })
+  }
 
   handleCellToggle(e) { // todo
-    let type = e.target.name;
-    let row = e.target.className.split('-')[2];
-    let col = e.target.className.split('-')[3]; 
+    let row = e.target.id.split('-')[2];
+    console.log('row :', row);
+    let col = e.target.id.split('-')[3];
+    for (let i = 0; i < this.state.x; i++) {
+      let cell = document.getElementById(`matrix-cell-${i}-${col}`)
+      if (i < row) {
+        cell.name = 'air';
+        cell.style['background-color'] = '#ffffff'
+        console.log('cell :', cell);
+      } else {
+        cell.name = 'block';
+        cell.style['background-color'] = '#bdbdbd';
+        console.log('cell :', cell);
+      }
+    }
+    let tempBlockArray = this.state.blockArray;
+    tempBlockArray[col] = parseInt(this.state.y - row - 1);
+    console.log('tempBlockArray :', tempBlockArray);
+    this.setState({
+      blockArray: tempBlockArray,
+    })
   }
 
   handleMatrixResize(e) {
-    
     let axis = e.target.name.split('-')[0]
     let direction = e.target.name.split('-')[1];
 
@@ -75,7 +115,10 @@ export default class WaterBlock extends Component {
         removeMatrix();
         this.setState({
           x: newHeight
-        }, () => this.generateMatrix())
+        }, () => {
+          this.generateMatrix()
+          this.applyMatrixToState()
+        })
       }
     } else {
       let prevWidth = this.state.y;
@@ -85,9 +128,43 @@ export default class WaterBlock extends Component {
         removeMatrix();
         this.setState({
           y: newWidth
-        }, () => this.generateMatrix())
+        }, () => {
+          this.generateMatrix()
+          this.applyMatrixToState()
+        })
       }
     }
+  }
+
+  makeItRain(b, w = 0) {
+    b = this.state.blockArray;
+    //loop through blocks skipping first and last
+    for (let i = 1; i < b.length - 1; i++) {
+      console.log('i :', i);
+      //find the highest block on the left side
+      let hiLeft = Math.max(...b.slice(0, i));
+      //get the highest block on the right side
+      let hiRight = Math.max(...b.slice(i + 1));
+      //find the minimum between two highest
+      let min = Math.min(hiLeft, hiRight);
+      console.log('min :', min);
+      //check if i is at least 1 less than min
+      if (b[i] < min) {
+        //water is space between min and i
+        w += min - b[i];
+      }
+      // ! needs to be fixed
+      // for (let j = min; j > 0; j--) {
+      //   let cell = document.getElementById(`matrix-cell-${j}-${i}`)
+        
+      //   cell.name = 'water';
+      //   cell.style['background-color'] = '#e3f2fd';
+      // }
+    }
+    console.log('w :', w);
+    this.setState({
+      waterVolume: w,
+    })
   }
 
   render() {
@@ -99,14 +176,20 @@ export default class WaterBlock extends Component {
             Water Blocks
             <span className='note'>(Toggle cells between blocks and air. Make it rain to see how much water is retained in the blocks.)</span>
             <div className='x-y-buttons'>
-              height:
-              <button className='matrix-button' name='height-increase' onClick={(e) => this.handleMatrixResize(e)}>▲</button>
-              <button className='matrix-button' name='height-decrease' onClick={(e) => this.handleMatrixResize(e)}>▼</button>
-              width:
-              <button className='matrix-button' name='width-decrease' onClick={(e) => this.handleMatrixResize(e)}>◀</button>
-              <button className='matrix-button' name='width-increase' onClick={(e) => this.handleMatrixResize(e)}>▶</button>
+              <div className='button-group'>
+                height:
+                <button className='matrix-button' name='height-increase' onClick={(e) => this.handleMatrixResize(e)}>▲</button>
+                <button className='matrix-button' name='height-decrease' onClick={(e) => this.handleMatrixResize(e)}>▼</button>
+              </div>
+              <div className='button-group'>
+                width:
+                <button className='matrix-button' name='width-decrease' onClick={(e) => this.handleMatrixResize(e)}>◀</button>
+                <button className='matrix-button' name='width-increase' onClick={(e) => this.handleMatrixResize(e)}>▶</button>
+              </div>
             </div>
             <div id='matrix'></div>
+            <button className='rain' onClick={() => this.makeItRain()}>Make It Rain</button>
+            <div className='water-volume'>Water Volume: {this.state.waterVolume}</div>
           </div>
         <Footer/>
         <style jsx>{`
@@ -127,16 +210,32 @@ export default class WaterBlock extends Component {
           .x-y-buttons {
             display: flex;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: .7em;
+          }
+
+          .button-group {
+            margin: 0px 5px;
           }
 
           .matrix-button {
             width: 25px;
             height: 25px;
             border: 1px solid black;
-            margin-right: 10px;
+            margin: 0px 5px;
 
+          }
+
+          .rain {
+            margin-top: 15px;
+            padding: 5px 10px;
+            border: 1px solid black;
+            font-family: Fira Code, monospace;
+          }
+
+          .water-volume {
+            margin-top: 15px;
+            font-size: .8em;
           }
 
           .note {
