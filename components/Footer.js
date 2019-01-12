@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <div>
       <div className='footer'>
-        Contact Info
+        {/* Contact Info */}
       </div>
       <style jsx>{`
         .footer {

@@ -16,7 +16,7 @@ export default class Navbar extends Component {
           <Link href='/'>
             <div className='logo'>
               <a className='link'>
-                Steven Duncan's Portfolio
+                Really Cool Website
               </a>
             </div>
           </Link>

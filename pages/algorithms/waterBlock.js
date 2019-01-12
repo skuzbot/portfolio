@@ -92,7 +92,6 @@ export default class WaterBlock extends Component {
     let tempBlockArray = this.state.blockArray;
     tempBlockArray[col] = parseInt(this.state.x - row);
     console.log('tempBlockArray :', tempBlockArray);
-    // todo my x and y are swapped here. need to fix
     this.setState({
       blockArray: tempBlockArray,
     })
@@ -116,7 +115,8 @@ export default class WaterBlock extends Component {
       if (newHeight < 11 && newHeight > 1) {
         removeMatrix();
         this.setState({
-          x: newHeight
+          x: newHeight,
+          waterVolume: 0,
         }, () => {
           this.generateMatrix()
           this.applyMatrixToState()
@@ -129,7 +129,8 @@ export default class WaterBlock extends Component {
       if (newWidth < 21 && newWidth > 2) {
         removeMatrix();
         this.setState({
-          y: newWidth
+          y: newWidth,
+          waterVolume: 0,
         }, () => {
           this.generateMatrix()
           this.applyMatrixToState()
@@ -140,6 +141,8 @@ export default class WaterBlock extends Component {
 
   makeItRain(b, w = 0) {
     b = this.state.blockArray;
+    let height = this.state.x;
+    console.log('height :', height);
     console.log('b :', b);
     //loop through blocks skipping first and last
     for (let i = 1; i < b.length - 1; i++) {
@@ -155,14 +158,17 @@ export default class WaterBlock extends Component {
       if (b[i] < min) {
         //water is space between min and i
         w += min - b[i];
+
+        for (let j = height - min; j < height; j++) {
+          console.log('j :', j);
+          console.log('min - b[i] :', min - b[i]);
+          let cell = document.getElementById(`matrix-cell-${j}-${i}`)
+          if (cell.name === 'air') {
+            cell.name = 'water';
+            cell.style['background-color'] = '#e3f2fd';
+          }
+        }
       }
-      // ! needs to be fixed
-      // for () {
-      //   let cell = document.getElementById(`matrix-cell-${j}-${i}`)
-        
-      //   cell.name = 'water';
-      //   cell.style['background-color'] = '#e3f2fd';
-      // }
     }
     console.log('w :', w);
     this.setState({
