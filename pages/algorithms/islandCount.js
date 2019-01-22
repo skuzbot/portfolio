@@ -9,6 +9,7 @@ export default class IslandCount extends Component {
     super(props)
     this.state = {
       loaded: false,
+      counted: false,
       width: 12,
       height: 8,
       map: [],
@@ -50,7 +51,8 @@ export default class IslandCount extends Component {
       map.appendChild(row);
     }
     this.setState({
-      loaded: true
+      loaded: true,
+      counted: false,
     })
   }
   
@@ -149,12 +151,36 @@ export default class IslandCount extends Component {
     console.log('map :', map);
     this.setState({
       count: count,
+      counted: true,
     })
 
     return count;
   }
 
+  resetMap() {
+    let map = document.getElementById('map');
+    while(map.lastChild) {
+      map.removeChild(map.lastChild)
+    }
+
+    this.setState({
+      count: 0,
+    }, () => {
+      this.generateMap()
+      this.applyMapToState()
+    })
+  }
+
   render() {
+
+    let counted = this.state.counted
+    let button;
+
+    if (counted) {
+      button = <button onClick={() => this.resetMap()}>Reset</button>
+    } else {
+      button = <button onClick={() => this.islandCount()}>Count</button>
+    }
     return(
       <div className='container'>
         <Meta/>
@@ -166,7 +192,7 @@ export default class IslandCount extends Component {
             <div id='map'>
             </div>
             <div className='island-count-output'>{this.state.count}</div>
-            <button onClick={() => this.islandCount()}></button>
+            {button}
           </div>
         <Footer/>
         <style jsx>{`
