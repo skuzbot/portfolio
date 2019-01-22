@@ -60,7 +60,6 @@ const AlgorithCard = ({ algorithm }) => {
             <div className='title'>
               {algorithm}
             </div>
-            {algorithm === 'Island Count' ? <div className='coming-soon'>Coming Soon!</div> : null}
             <div className='graphic'>
               {`${algorithmData[algorithm].graphic}`}
             </div>
