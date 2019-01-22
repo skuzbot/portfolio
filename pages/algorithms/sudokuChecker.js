@@ -72,7 +72,6 @@ export default class SudokuChecker extends Component {
 
   handleCellChange(e) {
     let input = e.target.value;
-    console.log('input :', input);
     let row = parseInt(e.target.className.charAt(12));
     let cell = parseInt(e.target.className.charAt(14));
     let prevMatrix = this.state.sudoku;

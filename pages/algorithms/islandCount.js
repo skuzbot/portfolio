@@ -8,6 +8,7 @@ export default class IslandCount extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loaded: false,
       width: 12,
       height: 8,
       map: [],
@@ -16,11 +17,10 @@ export default class IslandCount extends Component {
   }
 
   componentDidMount() {
-    this.generateMap();
-  }
-
-  componentDidUpdate() {
-    this.calculateIslandCount()
+    if (!this.state.loaded) {
+      this.generateMap();
+      this.applyMapToState();
+    }
   }
 
   generateMap() {
@@ -49,7 +49,24 @@ export default class IslandCount extends Component {
       }
       map.appendChild(row);
     }
-    this.applyMapToState();
+    this.setState({
+      loaded: true
+    })
+  }
+  
+  applyMapToState() {
+    const tempMap = [];
+    const map = document.getElementById('map');
+    const rows = map.children;
+    const tempRows = Array.from (rows, row => row.children);
+    tempRows.forEach(row => {
+      let tempCells = Array.from(row, cell => cell.name);
+      tempMap.push(tempCells)
+    })
+    this.setState({
+      map: tempMap
+    })
+
   }
 
   handleCellToggle(e) {
@@ -75,83 +92,6 @@ export default class IslandCount extends Component {
       })
     }
 
-  }
-
-  calculateIslandCount() {
-    let count = this.state.count;
-    let mapCount = this.state.map.slice();
-    let prevMap = this.state.map.slice();
-    console.log('map :', mapCount);
-    console.log('this.state.map :', this.state.map);
-
-    const isOnMap = (row, col) => {
-      return ((row >= 0 && row < mapCount.length) && (col >= 0 && col < mapCount[0].length));
-    };
-
-    const isLand = (row, col) => {
-      if (!isOnMap(row, col)) {
-        return false;
-      }
-      return (mapCount[row][col] === 'land');
-    };
-
-    const sinkLand = (row, col) => {
-      mapCount[row][col] = 'sunk';
-    };
-
-    const islandRecurse = (row, col) => {
-      if (isLand(row, col)) {
-        sinkLand(row, col);
-      }
-      if (isLand(row + 1, col)) {
-        sinkLand(row + 1, col);
-        islandRecurse(row + 1, col);
-      }
-      if (isLand(row - 1, col)) {
-        sinkLand(row - 1, col);
-        islandRecurse(row - 1, col);
-      }
-      if (isLand(row, col + 1)) {
-        sinkLand(row, col + 1);
-        islandRecurse(row, col + 1);
-      }
-      if (isLand(row, col - 1)) {
-        sinkLand(row, col - 1);
-        islandRecurse(row, col - 1);
-      }
-    };
-
-
-    for (let i = 0; i < mapCount.length; i++) {
-      for (let j = 0, len = mapCount[0].length; j < len; j++) {
-        if (mapCount[i][j] === 'land') {
-          islandRecurse(i, j);
-          count++;
-        }
-      }
-    }
-    console.log('count :', count);
-
-    if (count !== this.state.count) {
-      this.setState({
-        // map: prevMap,
-        count: count,
-      })
-    }
-  }
-
-  applyMapToState() {
-    let tempMap = [];
-    let map = document.getElementById('map');
-    let rows = map.children;
-    let arrRows = Array.from(rows, row => row.children);
-    arrRows.forEach(row => {
-      let arrCells = Array.from(row, cell => cell.name);
-      tempMap.push(arrCells);
-    })
-    this.setState({
-      map: tempMap,
-    })
   }
 
   render() {
