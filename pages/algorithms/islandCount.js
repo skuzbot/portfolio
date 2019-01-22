@@ -91,7 +91,67 @@ export default class IslandCount extends Component {
         map: prevMap,
       })
     }
+  }
 
+  islandCount() {
+    let count = 0;
+    let map = this.state.map.slice();
+
+    console.log('map :', map);
+
+    const isOnMap = (row, col) => {
+      return ((row >= 0 && row < map.length) && (col >= 0 && col < map[0].length));
+    };
+
+    const isLand = (row, col) => {
+      if (!isOnMap(row, col)) {
+        return false;
+      }
+      return (map[row][col] === 'land');
+    };
+
+    const sinkLand = (row, col) => {
+      map[row][col] = 'water';
+    };
+
+    const islandRecurse = (row, col) => {
+      if (isLand(row, col)) {
+        sinkLand(row, col);
+      }
+      if (isLand(row + 1, col)) {
+        sinkLand(row + 1, col);
+        islandRecurse(row + 1, col);
+      }
+      if (isLand(row - 1, col)) {
+        sinkLand(row - 1, col);
+        islandRecurse(row - 1, col);
+      }
+      if (isLand(row, col + 1)) {
+        sinkLand(row, col + 1);
+        islandRecurse(row, col + 1);
+      }
+      if (isLand(row, col - 1)) {
+        sinkLand(row, col - 1);
+        islandRecurse(row, col - 1);
+      }
+    };
+
+
+    for (let i = 0; i < map.length; i++) {
+      for (let j = 0, len = map[0].length; j < len; j++) {
+        if (map[i][j] === 'land') {
+          islandRecurse(i, j);
+          count++;
+        }
+      }
+    }
+    console.log('count :', count);
+    console.log('map :', map);
+    this.setState({
+      count: count,
+    })
+
+    return count;
   }
 
   render() {
@@ -103,9 +163,10 @@ export default class IslandCount extends Component {
 
           <div className='island-count'>
             Island Count <span className='note'>(Toggle map cells to change between land and water. Islands do not connect diagonally)</span>
-          <div id='map'>
-          </div>
-          <div className='island-count-output'>{this.state.count}</div>
+            <div id='map'>
+            </div>
+            <div className='island-count-output'>{this.state.count}</div>
+            <button onClick={() => this.islandCount()}></button>
           </div>
         <Footer/>
         <style jsx>{`
