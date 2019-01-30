@@ -18,7 +18,7 @@ export default class index extends Component {
         <Meta/>
         <Navbar/>
         <div>
-        Welcome to my portfolio!
+        Welcome to my portfolio! It is very much under construction right now so pardon the dust. Check out the Algorithms section!
         </div>
         <Footer/>
       </div>
