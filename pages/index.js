@@ -16,9 +16,9 @@ export default class index extends Component {
     return (
       <div>
         <Meta/>
+        <div className="content">
         <Navbar/>
-        <div>
-        Welcome to my portfolio! It is very much under construction right now so pardon the dust. Check out the Algorithms section!
+          Welcome to my portfolio! It is very much under construction right now so pardon the dust. Check out the Algorithms section!
         </div>
         <Footer/>
       </div>

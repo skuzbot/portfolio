@@ -10,13 +10,17 @@ const Meta = () => {
         <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet"/>
       </Head>
       <style jsx global>{`
-        body {
+        html, body {
           margin: 0;
           padding: 0;
           background-color: #cfcfcf;
           font-family: 'Fira Mono', monospace;
           height: 100%;
           cursor: default;
+        }
+
+        .content {
+          min-height: calc(100vh - 60px);
         }
       `}</style>
     </div>

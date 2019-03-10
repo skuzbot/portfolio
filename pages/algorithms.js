@@ -25,16 +25,18 @@ export default class Algorithms extends Component {
     return (
       <div className='container'>
         <Meta/>
-        <Navbar/>
-        <div className='algorithms-container'>
-          {this.state.algorithms.map(algorithm => {
-            return (
-              <AlgorithmCard 
-                key={algorithm}
-                algorithm={algorithm}
-              />
-            )
-          })}
+        <div className="content">
+          <Navbar/>
+          <div className='algorithms-container'>
+            {this.state.algorithms.map(algorithm => {
+              return (
+                <AlgorithmCard 
+                  key={algorithm}
+                  algorithm={algorithm}
+                />
+              )
+            })}
+          </div>
         </div>
         <Footer/>
         <style jsx>{`

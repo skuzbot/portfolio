@@ -7,8 +7,8 @@ const About = (props) => {
   return (
     <div className='about-container'>
       <Meta/>
+      <div className="content">
       <Navbar/>
-      <div>
         I'm Steven Duncan, a full stack engineer who loves to write applications in Javascript.
       </div>
       <Footer/>

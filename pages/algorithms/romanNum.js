@@ -50,31 +50,31 @@ export default class RomanNum extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
-        Roman Numerals
-
-        <div className='romanNum'>
-          Input any Roman numeral:
-          <span className='note'>(Valid characters are I, V, X, L, C, D, M)</span>
-          <input 
-            pattern='/[i|v|x|l|c|d|m]/gi'
-            className='numeral-input'
-            value={this.state.numeralInput}
-            onInput={(e) => e.target.value = e.target.value.replace(/[^i|v|x|l|c|d|m]/gi, '')}
-            onChange={(e) => this.handleNumeralInput(e)}/>
-          <div>{this.state.numeralInput}</div>
-          <div className='numeral-output'>
-            <div>Converted Number:</div>
-            <div>{this.state.numeralOutput}</div>
+        <div className="content">
+          <Navbar/>
+          <div className='romanNum'>
+            Input any Roman numeral:
+            <span className='note'>(Valid characters are I, V, X, L, C, D, M)</span>
+            <input 
+              pattern='/[i|v|x|l|c|d|m]/gi'
+              className='numeral-input'
+              value={this.state.numeralInput}
+              onInput={(e) => e.target.value = e.target.value.replace(/[^i|v|x|l|c|d|m]/gi, '')}
+              onChange={(e) => this.handleNumeralInput(e)}/>
+            <div>{this.state.numeralInput}</div>
+            <div className='numeral-output'>
+              <div>Converted Number:</div>
+              <div>{this.state.numeralOutput}</div>
+            </div>
           </div>
         </div>
         <Footer/>
         <style jsx>{`
           .romanNum {
-            margin: 20px;
+            margin-top: 20px;
             width: 100vw;
             display: flex;
-            font-size: 2em;
+            font-size: 1.8em;
             align-items: center;
             flex-direction: column;
             justify-content: space-between;
@@ -98,7 +98,6 @@ export default class RomanNum extends Component {
           }
 
           .note {
-            margin: 5px;
             font-size: 0.5em;
           }
         `}</style>

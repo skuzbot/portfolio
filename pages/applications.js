@@ -8,21 +8,23 @@ const Applications = (props) => {
   return (
     <div className='container'>
       <Meta/>
-      <Navbar/>
-      <div className='apps-container'>
-        <Link className='lyrebyrd'
-          as='/applications/lyrebyrd'
-          href='lyrebyrd'>
-          Lyre Byrd
-        </Link>
-        <div className='recicalc'>
-          ReciCalc
-        </div>
-        <div className='blob'>
-          Blob Health Tracker
-        </div>
-        <div className='word-view'>
-          Word View
+      <div className="content">
+        <Navbar/>
+        <div className='apps-container'>
+          <Link className='lyrebyrd'
+            as='/applications/lyrebyrd'
+            href='lyrebyrd'>
+            Lyre Byrd
+          </Link>
+          <div className='recicalc'>
+            ReciCalc
+          </div>
+          <div className='blob'>
+            Blob Health Tracker
+          </div>
+          <div className='word-view'>
+            Word View
+          </div>
         </div>
       </div>
       <Footer/>

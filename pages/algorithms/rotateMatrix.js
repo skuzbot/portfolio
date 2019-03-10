@@ -128,7 +128,8 @@ export default class RotateMatrix extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
+        <div className="content">
+          <Navbar/>
           <div className='rotate'>
             Rotate Matrix <span className='note'>(Feel free to change cell values)</span>
             <button name='increase' onClick={e => {if (this.state.n < 5) this.handleNChange(e)}}>
@@ -163,6 +164,7 @@ export default class RotateMatrix extends Component {
               </div>
             </div>
           </div>
+        </div>
         <Footer/>
         <style jsx>{`
           .rotate {
@@ -204,7 +206,7 @@ export default class RotateMatrix extends Component {
           }
 
           .note {
-            font-size: 0.4em;
+            font-size: 0.5em;
           }
         `}</style>
       </div>
