@@ -177,18 +177,20 @@ export default class SudokuChecker extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
+        <div className="content">
+          <Navbar/>
           <div className='sudoku'>
             Sudoku Board:
             <span className='note'>
               (I'll start you out with a valid solution. Edit to see changes)
             </span>
-          <div id='sudoku-matrix'>
+            <div id='sudoku-matrix'>
+            </div>
+            <div className='solved-status-display'>
+            {this.renderResult()}
+            </div>
           </div>
-          <div className='solved-status-display'>
-          {this.renderResult()}
-          </div>
-          </div>
+        </div>
         <Footer/>
         <style jsx>{`
           .sudoku {

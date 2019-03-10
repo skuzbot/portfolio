@@ -78,36 +78,38 @@ export default class IterativeFib extends Component {
   render() {
     return <div className="container">
         <Meta />
-        <Navbar />
-        <div className="fibonacci">
-          Input any number:
-          <span className="note">
-            {' '}
-            (Numbers over 1476 return <big>∞</big> & negative numbers are disabled){' '}
-          </span>
-          <div className="input-container">
-            <input 
-              min="0" 
-              type="number" 
-              value={this.state.numberInput} 
-              onChange={e => this.handleNumberInput(e)} 
-              onFocus={(e) => this.handleZeroFocus(e)}
-              />
-            <div>
-              <button name="increase" onClick={e => this.handleButtonClick(e)}>
-                ▲
-              </button>
-              <button name="decrease" onClick={e => this.handleButtonClick(e)}>
-                ▼
-              </button>
+        <div className="content">
+          <Navbar />
+          <div className="fibonacci">
+            Input any number:
+            <span className="note">
+              {' '}
+              (Numbers over 1476 return <big>∞</big> & negative numbers are disabled){' '}
+            </span>
+            <div className="input-container">
+              <input 
+                min="0" 
+                type="number" 
+                value={this.state.numberInput} 
+                onChange={e => this.handleNumberInput(e)} 
+                onFocus={(e) => this.handleZeroFocus(e)}
+                />
+              <div>
+                <button name="increase" onClick={e => this.handleButtonClick(e)}>
+                  ▲
+                </button>
+                <button name="decrease" onClick={e => this.handleButtonClick(e)}>
+                  ▼
+                </button>
+              </div>
             </div>
+            <div className='display'>Nth Fibonacci: {this.state.numberOutput}</div>
           </div>
-          <div className='display'>Nth Fibonacci: {this.state.numberOutput}</div>
         </div>
         <Footer />
         <style jsx>{`
           .fibonacci {
-            margin: 20px;
+            margin-top: 20px;
             width: 100vw;
             display: flex;
             font-size: 2em;

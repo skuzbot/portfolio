@@ -170,7 +170,8 @@ export default class WaterBlock extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
+        <div className="content">
+          <Navbar/>
           <div className='waterBlock'>
             Water Blocks
             <span className='note'>(Toggle cells between blocks and air. Make it rain to see how much water is retained in the blocks.)</span>
@@ -190,6 +191,7 @@ export default class WaterBlock extends Component {
             <button className='rain' onClick={() => this.makeItRain()}>Make It Rain</button>
             <div className='water-volume'>Water Volume: {this.state.waterVolume}</div>
           </div>
+        </div>
         <Footer/>
         <style jsx>{`
           .waterBlock {

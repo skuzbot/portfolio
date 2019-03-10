@@ -184,9 +184,8 @@ export default class IslandCount extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
-          Island Count
-
+        <div className="content">
+          <Navbar/>
           <div className='island-count'>
             Island Count <span className='note'>(Toggle map cells to change between land and water. Islands do not connect diagonally)</span>
             <div id='map'>
@@ -194,6 +193,7 @@ export default class IslandCount extends Component {
             <div className='island-count-output'>{this.state.count}</div>
             {button}
           </div>
+        </div>
         <Footer/>
         <style jsx>{`
           .island-count {

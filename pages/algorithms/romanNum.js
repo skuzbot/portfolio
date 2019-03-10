@@ -71,7 +71,7 @@ export default class RomanNum extends Component {
         <Footer/>
         <style jsx>{`
           .romanNum {
-            margin-top: 20px;
+            margin-topw: 20px;
             width: 100vw;
             display: flex;
             font-size: 1.8em;

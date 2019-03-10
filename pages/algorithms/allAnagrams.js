@@ -42,7 +42,8 @@ export default class AllAnagrams extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
+        <div className="content">
+          <Navbar/>
           <div className='anagrams'>
             Enter a string:
             <input 
@@ -53,10 +54,11 @@ export default class AllAnagrams extends Component {
             <div>{this.state.stringInput}</div>
             <div className='anagrams-output'>{JSON.stringify(this.state.anagrams)}</div>
           </div>
+        </div>
         <Footer/>
         <style jsx>{`
           .anagrams {
-            margin: 20px 0;
+            margin-top: 20px;
             width: 100vw;
             display: flex;
             font-size: 2em;

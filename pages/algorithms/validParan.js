@@ -89,7 +89,8 @@ export default class ValidParan extends Component {
     return(
       <div className='container'>
         <Meta/>
-        <Navbar/>
+        <div className="content">
+          <Navbar/>
           <div className='bracket-validator'>
             Bracket Validator:
             <span className='note'>(checks if brackets are balanced i.e. "()" -> true & "][" -> false)</span>
@@ -107,10 +108,11 @@ export default class ValidParan extends Component {
               {'' + this.state.isValid}
             </div>
           </div>
+        </div>
         <Footer/>
         <style jsx>{`
           .bracket-validator {
-            margin: 20px;
+            margin-top: 20px;
             width: 100vw;
             display: flex;
             font-size: 2em;
