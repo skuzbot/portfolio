@@ -41,6 +41,13 @@ export default class Navbar extends Component {
               </a>
             </div>
           </Link>
+          <Link href='/miniApps'>
+            <div className='miniApps navbar-item'>
+              <a className='link'>
+                Mini Apps
+              </a>
+            </div>
+          </Link>
           {/* <Link href='/resume'>
             <div className='resume navbar-item'>
               <a className='link'>

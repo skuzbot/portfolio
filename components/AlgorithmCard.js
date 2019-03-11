@@ -44,14 +44,6 @@ const AlgorithCard = ({ algorithm }) => {
     }
   }
 
-  const renderComingSoon = () => {
-    if (algorithm === 'Island Count') {
-      return (
-        <div className='coming-soon'>Coming Soon!</div>
-      )
-    }
-  }
-
   return (
     <div className='card-container'>
       <Link as={`/algorithms/${algorithmData[algorithm].fileName}`} href={`${algorithmData[algorithm].fileName}`}>
@@ -64,7 +56,6 @@ const AlgorithCard = ({ algorithm }) => {
               {`${algorithmData[algorithm].graphic}`}
             </div>
           </div>
-
         </a>
       </Link>
 

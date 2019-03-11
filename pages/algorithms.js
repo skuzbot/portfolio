@@ -25,7 +25,7 @@ export default class Algorithms extends Component {
     return (
       <div className='container'>
         <Meta/>
-        <div className="content">
+        <div className='content'>
           <Navbar/>
           <div className='algorithms-container'>
             {this.state.algorithms.map(algorithm => {
