@@ -19,7 +19,7 @@ export default class WikiArticle extends Component {
           <Navbar />
           wikiArticle
           <div className='wikiArticle'>
-
+            
           </div>
         </div>
         <Footer />

@@ -10,7 +10,7 @@ export default class MiniApps extends Component {
     this.state = {
       miniApps: [
         'Word View',
-        'Tick Tack Toe',
+        'Tic Tac Toe',
         'Calculator',
         'Connect Four',
         'Shopping Cart',

@@ -8,8 +8,8 @@ const MiniAppCard = ({ miniApp }) => {
       fontSize: '5em',
       complete: false,
     },
-    'Tick Tack Toe': {
-      fileName: 'tickTackToe',
+    'Tic Tac Toe': {
+      fileName: 'ticTacToe',
       graphic: '╋╋\n╋╋',
       fontSize: '3em',
       complete: false,
@@ -47,7 +47,7 @@ const MiniAppCard = ({ miniApp }) => {
     'Wiki Article': {
       fileName: 'wikiArticle',
       graphic: 'ⓦ',
-      fontSize: '4.5em',
+      fontSize: '5em',
       complete: false,
     }
   }
