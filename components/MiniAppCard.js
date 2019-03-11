@@ -4,50 +4,50 @@ const MiniAppCard = ({ miniApp }) => {
   const miniAppData = {
     'Word View': {
       fileName: 'wordView',
-      graphic: '',
-      fontSize: '1em',
+      graphic: '✎',
+      fontSize: '5em',
       complete: false,
     },
     'Tick Tack Toe': {
       fileName: 'tickTackToe',
-      graphic: '',
-      fontSize: '1em',
+      graphic: '╋╋\n╋╋',
+      fontSize: '3em',
       complete: false,
     },
     'Calculator': {
       fileName: 'calculator',
-      graphic: '',
-      fontSize: '1em',
+      graphic: '×÷\n+-',
+      fontSize: '4.5em',
       complete: false,
     },
     'Connect Four': {
-      fileName: 'connectFour',
-      graphic: '',
-      fontSize: '1em',
+      fileName: 'connectFour ○●',
+      graphic: '   ○   \n   ●●  \n ●○○●○●\n ○●○○●○\n○●○●●●○',
+      fontSize: '2em',
       complete: false,
     },
     'Shopping Cart': {
       fileName: 'shoppingCart',
-      graphic: '',
-      fontSize: '1em',
+      graphic: '$',
+      fontSize: '4em',
       complete: false,
     },
     'Game of Life': {
       fileName: 'gameOfLife',
-      graphic: '',
-      fontSize: '1em',
+      graphic: ' █ \n  █\n███',
+      fontSize: '2em',
       complete: false,
     },
     'Checkers': {
       fileName: 'checkers',
-      graphic: '',
+      graphic: '█ █ █ █ \n █ █ █ █\n█ █ █ █ \n █ █ █ █\n█ █ █ █ \n █ █ █ █\n█ █ █ █ \n █ █ █ █\n',
       fontSize: '1em',
       complete: false,
     },
     'Wiki Article': {
       fileName: 'wikiArticle',
-      graphic: '',
-      fontSize: '1em',
+      graphic: 'ⓦ',
+      fontSize: '4.5em',
       complete: false,
     }
   }
@@ -100,11 +100,13 @@ const MiniAppCard = ({ miniApp }) => {
         .graphic {
           white-space:pre-wrap;
           font-size: ${miniAppData[miniApp].fontSize};
-          flex-grow: .5;
+          flex-grow: .2;
+          line-height: 0.69;
         }
 
         .coming-soon {
           color: red;
+          margin-bottom: 10px;
         }
       `}</style>
     </div>

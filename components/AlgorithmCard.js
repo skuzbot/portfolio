@@ -42,7 +42,7 @@ const AlgorithCard = ({ algorithm }) => {
       graphic: 'Φ',
       fontSize: '6em',
     }
-  }
+  } 
 
   return (
     <div className='card-container'>
