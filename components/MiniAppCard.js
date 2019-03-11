@@ -16,12 +16,12 @@ const MiniAppCard = ({ miniApp }) => {
     },
     'Calculator': {
       fileName: 'calculator',
-      graphic: '×÷\n+-',
+      graphic: '×+\n÷-',
       fontSize: '4.5em',
       complete: false,
     },
     'Connect Four': {
-      fileName: 'connectFour ○●',
+      fileName: 'connectFour',
       graphic: '   ○   \n   ●●  \n ●○○●○●\n ○●○○●○\n○●○●●●○',
       fontSize: '2em',
       complete: false,
@@ -29,19 +29,19 @@ const MiniAppCard = ({ miniApp }) => {
     'Shopping Cart': {
       fileName: 'shoppingCart',
       graphic: '$',
-      fontSize: '4em',
+      fontSize: '4.5em',
       complete: false,
     },
     'Game of Life': {
       fileName: 'gameOfLife',
       graphic: ' █ \n  █\n███',
-      fontSize: '2em',
+      fontSize: '1.8em',
       complete: false,
     },
     'Checkers': {
       fileName: 'checkers',
       graphic: '█ █ █ █ \n █ █ █ █\n█ █ █ █ \n █ █ █ █\n█ █ █ █ \n █ █ █ █\n█ █ █ █ \n █ █ █ █\n',
-      fontSize: '1em',
+      fontSize: '1.5em',
       complete: false,
     },
     'Wiki Article': {

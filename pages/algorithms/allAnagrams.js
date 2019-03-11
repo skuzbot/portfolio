@@ -39,7 +39,7 @@ export default class AllAnagrams extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className='container'>
         <Meta/>
         <div className="content">
