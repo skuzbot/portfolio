@@ -9,8 +9,10 @@ export default class WordView extends Component {
     super(props)
     this.state = {
       searchQuery: '',
+
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
   handleInputChange(e) {
@@ -32,6 +34,11 @@ export default class WordView extends Component {
     .then((res) => {
       console.log(`${q} was searched`)
       console.log('*****RESPONSE HERE*****', res);
+      /*
+      res.data[0].word -> word
+      res.data[0].lexicalEntries
+
+      */
     })
     .catch((e) => {
       console.log('*=*=*=*=ERROR*=*=*=*');
@@ -48,6 +55,7 @@ export default class WordView extends Component {
           <Navbar />
           <div className='wordView'>
             <h2 className='title'>Word View</h2>
+            <h5 className='subtitle'>(Search Oxford for dictionary entries)</h5>
             <input
               className='search-query-input'
               onChange={(e) => this.handleInputChange(e)}
@@ -68,12 +76,16 @@ export default class WordView extends Component {
           }
 
           .title {
-            
+            margin-bottom: 10px;
+          }
+
+          .subtitle {
+            margin-top: 0px;
           }
 
           .search-query-input {
             margin: 20px;
-            height: 80px;
+            height: 60px;
             width: 700px;
             text-align: center;
             font-size: 1.8em;
