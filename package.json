@@ -8,7 +8,7 @@
     "dev": "next dev",
     "server": "nodemon server/server.js",
     "build": "next build",
-    "start": "NODE_ENV=production nodemon server/server.js"
+    "start": "NODE_ENV=production node server/server.js"
   },
   "repository": {
     "type": "git",
