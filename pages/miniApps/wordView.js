@@ -30,7 +30,8 @@ export default class WordView extends Component {
       }
     })
     .then((res) => {
-      console.log(`${res} was searched`)
+      console.log(`${q} was searched`)
+      console.log('*****RESPONSE HERE*****', res);
     })
     .catch((e) => {
       console.log('*=*=*=*=ERROR*=*=*=*');
