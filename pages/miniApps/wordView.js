@@ -9,7 +9,8 @@ export default class WordView extends Component {
     super(props)
     this.state = {
       searchQuery: '',
-
+      word: '',
+      etymologies: [],
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -36,9 +37,16 @@ export default class WordView extends Component {
       console.log('*****RESPONSE HERE*****', res);
       /*
       res.data[0].word -> word
-      res.data[0].lexicalEntries
+      res.data[0].lexicalEntries.entries.etymologies[0] -> etymologies
 
       */
+     // TODO this can stay here for now but I'd like not send all data back to client if possible.
+     const word = res.data[0].word;
+     const etymologies = res.data[0].lexicalEntries[0].entries[0].etymologies;
+     const senses = res.data[0].lexicalEntries[0].entries[0].senses[0];
+     console.log('word :', word);
+     console.log('etymologies :', etymologies);
+     console.log('senses :', senses);
     })
     .catch((e) => {
       console.log('*=*=*=*=ERROR*=*=*=*');
@@ -56,14 +64,19 @@ export default class WordView extends Component {
           <div className='wordView'>
             <h2 className='title'>Word View</h2>
             <h5 className='subtitle'>(Search Oxford for dictionary entries)</h5>
-            <input
-              className='search-query-input'
-              onChange={(e) => this.handleInputChange(e)}
-            />
-            <button
-              className='search-submit-button'
-              onClick={(e) => this.handleSearchSubmit(e)}
-            >Search</button>
+            <div className='search-input-container'>
+              <input
+                className='search-query-input'
+                onChange={(e) => this.handleInputChange(e)}
+              />
+              <button
+                className='search-submit-button'
+                onClick={(e) => this.handleSearchSubmit(e)}
+              >
+                Search
+              </button>
+            </div>
+            
           </div>
         </div>
         <Footer />
@@ -84,7 +97,7 @@ export default class WordView extends Component {
           }
 
           .search-query-input {
-            margin: 20px;
+            margin: 10px;
             height: 60px;
             width: 700px;
             text-align: center;

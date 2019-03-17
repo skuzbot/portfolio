@@ -1,5 +1,5 @@
 // oxford response object
-results = [{
+const pig = [{
   "id": "pig",
   "language": "en",
   "lexicalEntries": [{
@@ -164,4 +164,149 @@ results = [{
   }],
   "type": "headword",
   "word": "pig"
+}]
+
+const brain = [{
+  "id": "brain",
+  "language": "en",
+  "lexicalEntries": [{
+    "entries": [{
+      "etymologies": ["Old English brægen, of West Germanic origin; related to Dutch brein"],
+      "grammaticalFeatures": [{
+        "text": "Singular",
+        "type": "Number"
+      }],
+      "homographNumber": "000",
+      "senses": [{
+        "definitions": ["an organ of soft nervous tissue contained in the skull of vertebrates, functioning as the coordinating center of sensation and intellectual and nervous activity."],
+        "domains": ["Anatomy"],
+        "id": "m_en_gbus0121010.006",
+        "notes": [{
+          "text": "The human brain consists of three main parts. (i) The forebrain, greatly developed into the cerebrum, consists of two hemispheres joined by a bridge of nerve fibers, and is responsible for thought and control of speech. (ii) The midbrain, the upper part of the tapering brainstem, contains cells involved in eye movements. (iii) The hindbrain, the lower part of the brainstem, contains cells responsible for breathing and for regulating heart action, the flow of digestive juices, and other unconscious actions and processes. The cerebellum, which lies behind the brain stem, plays an important role in the execution of highly skilled movements",
+          "type": "encyclopedicNote"
+        }],
+        "short_definitions": ["organ in skull"],
+        "subsenses": [{
+          "definitions": ["the substance of an animal's brain used as food."],
+          "domains": ["Food"],
+          "id": "m_en_gbus0121010.009",
+          "notes": [{
+            "text": "\"brains\"",
+            "type": "wordFormNote"
+          }],
+          "short_definitions": ["animal's brain used as food"]
+        }, {
+          "definitions": ["an electronic device with functions comparable to those of the human brain."],
+          "domains": ["Electronics"],
+          "id": "m_en_gbus0121010.011",
+          "registers": ["informal"],
+          "short_definitions": ["device comparable to brain"]
+        }],
+        "thesaurusLinks": [{
+          "entry_id": "brain",
+          "sense_id": "t_en_gb0001690.001"
+        }]
+      }, {
+        "definitions": ["intellectual capacity"],
+        "examples": [{
+          "text": "success requires brain as well as brawn"
+        }, {
+          "text": "I didn't have enough brains for the sciences"
+        }],
+        "id": "m_en_gbus0121010.015",
+        "short_definitions": ["intellectual capacity"],
+        "subsenses": [{
+          "definitions": ["a clever person who supplies the ideas and plans for a group of people"],
+          "examples": [{
+            "text": "Tom was the brains of the outfit"
+          }],
+          "id": "m_en_gbus0121010.016",
+          "notes": [{
+            "text": "\"the brains\"",
+            "type": "wordFormNote"
+          }],
+          "registers": ["informal"],
+          "short_definitions": ["person supplying ideas for group"],
+          "thesaurusLinks": [{
+            "entry_id": "brain",
+            "sense_id": "t_en_gb0001690.003"
+          }]
+        }, {
+          "definitions": ["a person's mind"],
+          "examples": [{
+            "text": "a tiny alarm bell began to ring in her brain"
+          }],
+          "id": "m_en_gbus0121010.018",
+          "short_definitions": ["person's mind"],
+          "thesaurusLinks": [{
+            "entry_id": "feeling",
+            "sense_id": "t_en_gb0005556.010"
+          }]
+        }, {
+          "definitions": ["an exceptionally intelligent person"],
+          "examples": [{
+            "text": "he was known more as a snappy dresser than a brain"
+          }],
+          "id": "m_en_gbus0121010.019",
+          "short_definitions": ["exceptionally intelligent person"]
+        }],
+        "thesaurusLinks": [{
+          "entry_id": "brain",
+          "sense_id": "t_en_gb0001690.002"
+        }]
+      }]
+    }],
+    "language": "en",
+    "lexicalCategory": "Noun",
+    "pronunciations": [{
+      "dialects": ["American English"],
+      "phoneticNotation": "respell",
+      "phoneticSpelling": "brān"
+    }, {
+      "audioFile": "http://audio.oxforddictionaries.com/en/mp3/brain_us_1.mp3",
+      "dialects": ["American English"],
+      "phoneticNotation": "IPA",
+      "phoneticSpelling": "breɪn"
+    }],
+    "text": "brain"
+  }, {
+    "entries": [{
+      "grammaticalFeatures": [{
+        "text": "Transitive",
+        "type": "Subcategorization"
+      }, {
+        "text": "Present",
+        "type": "Tense"
+      }],
+      "homographNumber": "001",
+      "senses": [{
+        "definitions": ["hit (someone) hard on the head with an object"],
+        "examples": [{
+          "text": "she brained me with a rolling pin"
+        }],
+        "id": "m_en_gbus0121010.021",
+        "registers": ["informal"],
+        "short_definitions": ["hit someone on head"],
+        "thesaurusLinks": [{
+          "entry_id": "crown",
+          "sense_id": "t_en_gb0003260.008"
+        }]
+      }]
+    }],
+    "language": "en",
+    "lexicalCategory": "Verb",
+    "pronunciations": [{
+      "dialects": ["American English"],
+      "phoneticNotation": "respell",
+      "phoneticSpelling": "brān"
+    }, {
+      "audioFile": "http://audio.oxforddictionaries.com/en/mp3/brain_us_1.mp3",
+      "dialects": ["American English"],
+      "phoneticNotation": "IPA",
+      "phoneticSpelling": "breɪn"
+    }],
+    "text": "brain"
+  }],
+  "type": "headword",
+  "word": "brain"
 }]
