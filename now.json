@@ -2,6 +2,7 @@
   "version": 2,
   "alias": ["stevenduncan-portfolio.now.sh", "stevenduncan.app"],
   "builds": [
-    { "src": "package.json", "use": "@now/next" }
+    { "src": "package.json", "use": "@now/next" },
+    { "src": "server/server.js", "use": "@now/node-server" }
   ]
 }
