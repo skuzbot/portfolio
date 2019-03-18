@@ -16,6 +16,7 @@ export default class TicTacToe extends Component {
       gameFinished: false,
       xScore: 0,
       oScore: 0,
+      moves: 0,
     }
     this.handleCellClick = this.handleCellClick.bind(this);
   }
@@ -24,15 +25,17 @@ export default class TicTacToe extends Component {
     e.preventDefault()
     if (e.target.value === '') {
       let [row, column] = [...e.target.name.split('-')]
-      // console.log('row :', row);
-      // console.log('column :', column);
       let prevBoard = [...this.state.board];
+      let prevMoves = this.state.moves;
+      prevMoves++;
       prevBoard[row][column] = this.state.currentPlayer;
       
       console.log('prevBoard :', prevBoard);
       this.setState({
         board: prevBoard,
+        moves: prevMoves,
       }, () => {
+        console.log('this.state.moves :', this.state.moves);
         this.handlePlayerToggle();
       })
     }
@@ -50,6 +53,10 @@ export default class TicTacToe extends Component {
       })
     )
   };
+  
+  checkForGameFinish() {
+    
+  }
   
   render() {
     return (
