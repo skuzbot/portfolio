@@ -12,7 +12,7 @@ const MiniAppCard = ({ miniApp }) => {
       fileName: 'ticTacToe',
       graphic: '╋╋\n╋╋',
       fontSize: '3em',
-      complete: false,
+      complete: true,
     },
     'Calculator': {
       fileName: 'calculator',
@@ -63,8 +63,8 @@ const MiniAppCard = ({ miniApp }) => {
             <div className='graphic'>
               {`${miniAppData[miniApp].graphic}`}
             </div>
-            {!miniAppData[miniApp].complete ? <div className='coming-soon'>Coming Soon!</div> : null}
           </div>
+          {!miniAppData[miniApp].complete ? <div className='coming-soon'>Coming Soon!</div> : null}
         </a>
       </Link>
 
@@ -100,13 +100,12 @@ const MiniAppCard = ({ miniApp }) => {
         .graphic {
           white-space:pre-wrap;
           font-size: ${miniAppData[miniApp].fontSize};
-          flex-grow: .2;
+          flex-grow: .5;
           line-height: 0.69;
         }
 
         .coming-soon {
           color: red;
-          margin-bottom: 10px;
         }
       `}</style>
     </div>
