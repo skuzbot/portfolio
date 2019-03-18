@@ -19,6 +19,10 @@ const Meta = () => {
           cursor: default;
         }
 
+        button {
+          cursor: pointer;
+        }
+
         .content {
           min-height: calc(100vh - 60px);
         }

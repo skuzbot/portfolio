@@ -16,6 +16,10 @@ export default class WordView extends Component {
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
   }
 
+  componentDidUpdate() {
+
+  }
+
   handleInputChange(e) {
     e.preventDefault();
     let input = e.target.value;
@@ -27,31 +31,36 @@ export default class WordView extends Component {
   handleSearchSubmit(e) {
     e.preventDefault()
     const q = this.state.searchQuery;
-    axios.get(`/api/oxford_search`, {
-      params: {
-        query: q,
-      }
-    })
-    .then((res) => {
-      console.log(`${q} was searched`)
-      console.log('*****RESPONSE HERE*****', res);
-      /*
-      res.data[0].word -> word
-      res.data[0].lexicalEntries.entries.etymologies[0] -> etymologies
 
-      */
-     // TODO this can stay here for now but I'd like not send all data back to client if possible.
-     const word = res.data[0].word;
-     const etymologies = res.data[0].lexicalEntries[0].entries[0].etymologies;
-     const senses = res.data[0].lexicalEntries[0].entries[0].senses[0];
-     console.log('word :', word);
-     console.log('etymologies :', etymologies);
-     console.log('senses :', senses);
-    })
-    .catch((e) => {
-      console.log('*=*=*=*=ERROR*=*=*=*');
-      console.error(e);
-    })
+    if (q !== '') {
+      axios.get(`/api/oxford_search`, {
+        params: {
+          query: q,
+        }
+      })
+      .then((res) => {
+        console.log(`${q} was searched`)
+        console.log('*****RESPONSE HERE*****', res);
+        // TODO this can stay here for now but I'd like not send all data back to client if possible.
+        /*
+        res.data[0].word -> word
+        res.data[0].lexicalEntries.entries.etymologies[0] -> etymologies
+
+        */
+      
+      
+
+      // TODO set state for word data
+
+
+      })
+      .catch((e) => {
+        console.log('*=*=*=*=ERROR*=*=*=*');
+        console.error(e);
+      })
+    } else {
+      alert("please enter a word to search");
+    }
 
   }
   
@@ -93,12 +102,18 @@ export default class WordView extends Component {
           }
 
           .subtitle {
-            margin-top: 0px;
+            margin: 0px;
+          }
+
+          .search-input-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
           }
 
           .search-query-input {
             margin: 10px;
-            height: 60px;
+            height: 70px;
             width: 700px;
             text-align: center;
             font-size: 1.8em;
@@ -108,8 +123,11 @@ export default class WordView extends Component {
           }
 
           .search-submit-button {
-            outline: none;
+            padding: 0px;
+            margin-top: 10px;
             border: 1px solid black;
+            height: 70px;
+            width: 70px;
             font-family: 'Fira Mono', monospace;
           }
         `}</style>
