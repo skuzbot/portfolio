@@ -17,7 +17,39 @@ export default class TicTacToe extends Component {
       xScore: 0,
       oScore: 0,
     }
+    this.handleCellClick = this.handleCellClick.bind(this);
   }
+
+  handleCellClick(e) {
+    e.preventDefault()
+    if (e.target.value === '') {
+      let [row, column] = [...e.target.name.split('-')]
+      // console.log('row :', row);
+      // console.log('column :', column);
+      let prevBoard = [...this.state.board];
+      prevBoard[row][column] = this.state.currentPlayer;
+      
+      console.log('prevBoard :', prevBoard);
+      this.setState({
+        board: prevBoard,
+      }, () => {
+        this.handlePlayerToggle();
+      })
+    }
+    console.log('e.target.value :', e.target.value);
+  }
+
+  handlePlayerToggle() {
+    this.state.currentPlayer === 'X' ? (
+      this.setState({
+        currentPlayer: 'O'
+      })
+    ) : (
+      this.setState({
+        currentPlayer: 'X'
+      })
+    )
+  };
   
   render() {
     return (
@@ -36,38 +68,75 @@ export default class TicTacToe extends Component {
             </div>
             <div className='board-container'>
               <div className='board-cell-0-0 cell'>
-                <button className='cell-button'></button>
+                <button 
+                  name='0-0' 
+                  value={this.state.board[0][0]}
+                  onClick={(e) => this.handleCellClick(e)} 
+                  className='cell-button button-0-0'>{this.state.board[0][0]}</button>
+
               </div>
               <div className='board-cell-0-1 cell'>
-                <button className='cell-button'></button>
+                <button 
+                  name='0-1' 
+                  value={this.state.board[0][1]}
+                  onClick={(e) => this.handleCellClick(e)} 
+                  className='cell-button button-0-1'>{this.state.board[0][1]}</button>
+
               </div>
 
               <div className='board-cell-0-2 cell'>
-                <button className='cell-button'></button>
+                <button 
+                  name='0-2'
+                  value={this.state.board[0][2]}
+                  onClick={(e) => this.handleCellClick(e)} 
+                  className='cell-button button-0-2'>{this.state.board[0][2]}</button>
 
               </div>
               <div className='board-cell-1-0 cell'>
-                <button className='cell-button'></button>
+                <button 
+                  name='1-0' 
+                  onClick={(e) => this.handleCellClick(e)} 
+                  className='cell-button button-1-0'>{this.state.board[1][0]}</button>
 
               </div>
               <div className='board-cell-1-1 cell'>
-                <button className='cell-button'></button>
+                <button 
+                name='1-1'
+                value={this.state.board[1][1]}
+                onClick={(e) => this.handleCellClick(e)} 
+                className='cell-button button-1-1'>{this.state.board[1][1]}</button>
 
               </div>
               <div className='board-cell-1-2 cell'>
-                <button className='cell-button'></button>
+                <button 
+                name='1-2'
+                value={this.state.board[1][2]}
+                onClick={(e) => this.handleCellClick(e)} 
+                className='cell-button button-1-2'>{this.state.board[1][2]}</button>
 
               </div>
               <div className='board-cell-2-0 cell'>
-                <button className='cell-button'></button>
+                <button  
+                name='2-0'
+                value={this.state.board[2][0]}
+                onClick={(e) => this.handleCellClick(e)} 
+                className='cell-button button-2-0'>{this.state.board[2][0]}</button>
 
               </div>
               <div className='board-cell-2-1 cell'>
-                <button className='cell-button'></button>
+                <button  
+                name='2-1'
+                value={this.state.board[2][1]}
+                onClick={(e) => this.handleCellClick(e)} 
+                className='cell-button button-2-1'>{this.state.board[2][1]}</button>
 
               </div>
               <div className='board-cell-2-2 cell'>
-                <button className='cell-button'></button>
+                <button 
+                name='2-2'
+                value={this.state.board[2][2]}
+                onClick={(e) => this.handleCellClick(e)} 
+                className='cell-button button-2-2'>{this.state.board[2][2]}</button>
 
               </div>
             </div>
@@ -121,6 +190,7 @@ export default class TicTacToe extends Component {
             cursor:pointer;
             overflow: hidden;
             outline:none;
+            font-size: 2em;
           }
 
           .board-cell-0-0 {
