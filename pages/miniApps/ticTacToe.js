@@ -21,7 +21,6 @@ export default class TicTacToe extends Component {
       },
       moves: 0,
     }
-    this.handleCellClick = this.handleCellClick.bind(this);
     this.startNewGame = this.startNewGame.bind(this);
   }
 
@@ -38,10 +37,8 @@ export default class TicTacToe extends Component {
         board: prevBoard,
         moves: prevMoves,
       }, () => {
-        console.log('this.state.moves :', this.state.moves);
         this.handlePlayerToggle();
         if (this.state.moves >= 5) {
-          console.log('checking game win state from handleCellClick');
           this.checkForGameFinish();
         }
       })
@@ -66,20 +63,17 @@ export default class TicTacToe extends Component {
     let winner = '';
     let prevScore = Object.assign({}, this.state.score);
     let curBoard = [...this.state.board];
-    console.log('curBoard :', curBoard);
 
     //make a 90 degree rotated version to check columns
     let len = curBoard.length - 1;
     let curBoardRotated = curBoard.map((row, i) => (
       row.map((cell, j) => curBoard[len - j][i])
     ))
-    console.log('curBoardRotated :', curBoardRotated);
 
     //define check rows function
     const checkRows = m => {
       m.forEach(row => {
         if (row[0] !== '' && row.every(v => v === row[0])) {
-          console.log('winner found: ', row[0])
           winFound = true;
           winner = row[0]
         }
@@ -92,11 +86,9 @@ export default class TicTacToe extends Component {
       for (let i = 0; i < 3; i++) {
         diag.push(m[i][i]);
       }
-      console.log('diag :', diag);
       if (diag[0] !== '' && diag.every(v => v === diag[0])) {
         winFound = true;
         winner = diag[0];
-        console.log('winner found :', winner);
       }
     }
 
@@ -109,13 +101,9 @@ export default class TicTacToe extends Component {
     //update state if win is found
     if (winFound === true) {
       prevScore[winner]++;
-      console.log('prevScore :', prevScore);
       this.setState({
         gameFinished: true,
         score: prevScore,
-      }, () => {
-        // ! checking score state
-        console.log(this.state.score);
       })
     }
 
@@ -127,8 +115,6 @@ export default class TicTacToe extends Component {
   }
 
   startNewGame() {
-    console.log('new game requested')
-
     this.setState({
       currentPlayer: 'X',
       board: [

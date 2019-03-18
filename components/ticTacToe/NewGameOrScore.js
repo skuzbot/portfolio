@@ -18,8 +18,6 @@ const NewGameOrScore = (props) => {
   let gameFinished = props.gameFinished;
   let currentPlayer = props.currentPlayer;
   const startNewGame = props.startNewGame;
-  console.log('moves :', moves);
-  console.log('gameFinished :', gameFinished);
   if (moves === 9 && gameFinished) {
     return (
       <div style={buttonContainer}>
