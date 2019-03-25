@@ -3,6 +3,7 @@ const Footer = () => {
     <div>
       <div className='footer'>
         {/* Contact Info */}
+        
       </div>
       <style jsx>{`
         .footer {

@@ -28,7 +28,7 @@ export default class Algorithms extends Component {
         <Navbar/>
         <div className='content'>
           <div className='message'>
-            Solving coding toy-problems is one of my favorite passtimes. I built a UI for some of my favorites. Here they are!
+            Solving coding toy-problems is one of my favorite passtimes. I thought it'd be cool to build a UI for some of them. Here they are!
           </div>
           <div className='algorithms-container'>
             {this.state.algorithms.map(algorithm => {
