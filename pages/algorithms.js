@@ -25,9 +25,12 @@ export default class Algorithms extends Component {
     return (
       <div className='container'>
         <Meta/>
+        <Navbar/>
         <div className='content'>
-          <Navbar/>
-          Solving coding toy-problems is one of my favorite passtimes. I built a UI for some of my favorites. Here they are!
+          <div className='message'>
+            Solving coding toy-problems is one of my favorite passtimes. I built a UI for some of my favorites. Here they are!
+
+          </div>
           <div className='algorithms-container'>
             {this.state.algorithms.map(algorithm => {
               return (
@@ -51,6 +54,18 @@ export default class Algorithms extends Component {
             flex-direction: row;
             flex-wrap: wrap;
             justify-content; space-evenly;
+          }
+
+          .content {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+          }
+
+          .message {
+            margin-top: 5px;
+            margin-right: auto;
+            margin-left: auto;
           }
         `}</style>
         
