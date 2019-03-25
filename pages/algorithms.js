@@ -27,6 +27,7 @@ export default class Algorithms extends Component {
         <Meta/>
         <div className='content'>
           <Navbar/>
+          Solving coding toy-problems is one of my favorite passtimes. I built a UI for some of my favorites. Here they are!
           <div className='algorithms-container'>
             {this.state.algorithms.map(algorithm => {
               return (
