@@ -29,7 +29,6 @@ export default class Algorithms extends Component {
         <div className='content'>
           <div className='message'>
             Solving coding toy-problems is one of my favorite passtimes. I built a UI for some of my favorites. Here they are!
-
           </div>
           <div className='algorithms-container'>
             {this.state.algorithms.map(algorithm => {
@@ -57,13 +56,13 @@ export default class Algorithms extends Component {
           }
 
           .content {
+            padding: 0;
             display: flex;
-            justify-content: center;
             flex-direction: column;
           }
 
           .message {
-            margin-top: 5px;
+            margin-top: 20px;
             margin-right: auto;
             margin-left: auto;
           }
