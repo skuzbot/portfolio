@@ -12,7 +12,7 @@ const MiniAppCard = ({ miniApp }) => {
       fileName: 'ticTacToe',
       graphic: '╋╋\n╋╋',
       fontSize: '3em',
-      complete: true,
+      complete: false,
     },
     'Calculator': {
       fileName: 'calculator',
