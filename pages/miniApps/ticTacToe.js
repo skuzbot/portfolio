@@ -60,9 +60,11 @@ export default class TicTacToe extends Component {
   checkForGameFinish() {
     //copy of state board
     let winFound = false;
+    let gameFinished = false;
     let winner = '';
     let prevScore = Object.assign({}, this.state.score);
     let curBoard = [...this.state.board];
+    let curMoves = this.state.moves;
 
     //make a 90 degree rotated version to check columns
     let len = curBoard.length - 1;
@@ -75,7 +77,11 @@ export default class TicTacToe extends Component {
       m.forEach(row => {
         if (row[0] !== '' && row.every(v => v === row[0])) {
           winFound = true;
+          gameFinished = true;
           winner = row[0]
+        }
+        if (curMoves === 9) {
+          gameFinished = true;
         }
       })
     }
@@ -88,7 +94,11 @@ export default class TicTacToe extends Component {
       }
       if (diag[0] !== '' && diag.every(v => v === diag[0])) {
         winFound = true;
+        gameFinished = true;
         winner = diag[0];
+      }
+      if (curMoves === 9) {
+        gameFinished = true;
       }
     }
 
