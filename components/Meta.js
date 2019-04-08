@@ -5,7 +5,7 @@ const Meta = () => {
   return (
     <div>
       <Head>
-        <title>Steven Duncan's Portfolio</title>
+        <title>Steven Duncan's Code Playground</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet"/>
       </Head>
